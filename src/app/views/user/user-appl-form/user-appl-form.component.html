@@ -1,0 +1,204 @@
+<app-font-set ></app-font-set>
+<app-user-head  [pgName]="lan.application_form"></app-user-head>
+<app-big-header [number]=1 [userName]="userName"></app-big-header>
+
+<ngx-ui-loader></ngx-ui-loader>
+
+
+<div [ngClass]="['container', diff]">
+
+    <form [formGroup]="contactForm" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}">
+                        {{ lan.user_type }} <span style="color:red">
+                            *</span></label>
+
+                    <select formControlName="applicant_type" 
+                            [ngClass]="['form-control frm-inside-txt', ft_md]"
+                            [class.is-invalid]='submitted && f.applicant_type.errors'>
+
+                        <option value="Indian">Indian</option>
+                        <option value="foreigner">Foreigner</option>
+                        <option value="nri">NRI</option>
+                        <option value="behalf">Onbehalf</option>
+                    </select>
+                    <div *ngIf="submitted && f.applicant_type.errors" class="invalid-feedback">
+                        <div *ngIf="f.applicant_type.errors.required"> {{ lan.field_required }} </div>
+                    </div>
+                </div>
+
+                <div *ngIf="contactForm.value.applicant_type === 'behalf'" class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                        ngbTooltip="{{lan.tooltip}}">{{ lan.relationship }} <span style="color:red"> *</span></label>
+                    <input type="text" autocomplete="off" formControlName="relationship_with_applicant"
+                        required="{{contactForm.value.applicant_type === 'behalf'}}"
+                       [ngClass]="['form-control frm-inside-txt', ft_md]"
+                        [class.is-invalid]="submitted && f. relationship_with_applicant.errors">
+                    <div *ngIf="submitted && f.relationship_with_applicant.errors" class="invalid-feedback">
+                        <div *ngIf="f.relationship_with_applicant.errors.required"> {{ lan.field_required }} </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}">
+                        {{ lan.full_name}} <span style="color:red">
+                            *</span></label>
+                    <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" autocomplete="off" 
+                    [class.is-invalid]="submitted && f. full_name.errors"
+                        formControlName="full_name" >
+                    <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.full_name.errors.required"> {{ lan.field_required }} </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}">
+                                {{ lan.sex }} <span style="color:red">
+                                    *</span></label>
+                            <select formControlName="sex" value="Choose" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                            [class.is-invalid]="submitted && f.sex.errors">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <div *ngIf="submitted && f.sex.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sex.errors.required"> {{ lan.field_required }} </div>
+                                </div>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                            ngbTooltip="{{lan.tooltip}}">{{ lan.date_of_birth }}<span style="color:red">
+                                *</span></label>
+                        <div class="form-group input-group">
+                            <input type="text" bsDatepicker [ngClass]="['form-control frm-inside-txt', ft_md]" autocomplete="off"
+                                 formControlName="date_of_birth"
+                                (ngModelChange)="ageChk(contactForm.value.date_of_birth)" [(bsValue)]="date_of_birth"
+                                value="{{ date_of_birth | date:'dd/MM/yyyy' }}" 
+                                [class.is-invalid]='submitted && (f.date_of_birth.errors || !ageStatus)'
+                                >
+
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+                            </div>
+
+                            <div *ngIf="submitted && f.date_of_birth.errors" class="invalid-feedback">
+                                <div *ngIf="f.date_of_birth.errors.required"> {{ lan.field_required }} </div>
+                            </div>
+                            <div *ngIf="submitted && !ageStatus" class="invalid-feedback">
+                                <div> {{ lan.valid_date_of_birth }} </div>
+                            </div>
+
+
+                        </div>
+                
+                    </div>
+                </div>
+
+                <div *ngIf="contactForm.value.applicant_type === 'foreigner'" class="form-group">
+                    <label [ngClass]="['radio-inline', ft_md]">Do you have valid visa/R.P. letter/extension application?
+                        <span style="color:red">*</span>
+                    </label>
+                        <div>
+                                <input type="radio" [checked]="valid_yes" name="valid_visa" value="Yes" (change)="toggle('Yes')"> Yes &nbsp;
+                                <input type="radio" [checked]="valid_no"  name="valid_visa" value="No" (change)="toggle('No')"> No
+                            </div>
+                   
+                       
+                        <!-- <div *ngIf="submitted && valid_visa.errors?.required">
+                            <div> {{ lan.field_required }} </div>
+                        </div> -->
+             </div>
+
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                        ngbTooltip="{{lan.tooltip}}">{{ lan.nationality }} <span style="color:red">
+                            *</span></label>
+                    <select formControlName="nationality" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    [class.is-invalid]="submitted && f.nationality.errors" >
+                        
+                        <option *ngFor="let countries of api">{{countries.name}}</option>
+                        <div *ngIf="submitted && f.nationality.errors" class="invalid-feedback">
+                            <div *ngIf="f.nationality.errors.required"> {{ lan.field_required }} </div>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                        ngbTooltip="{{lan.tooltip}}">{{ lan.fathers_name }}<span style="color:red"> *</span></label>
+                    <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" autocomplete="off"
+                         formControlName="father_name"
+                        [class.is-invalid]="submitted && f.father_name.errors">
+                    <div *ngIf="submitted && f.father_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.father_name.errors.required"> {{ lan.field_required }} </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}">
+                        {{ lan.mothers_name }} <span style="color:red"> *</span></label>
+                    <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" autocomplete="off"
+                        formControlName="mother_name"
+                        [class.is-invalid]="submitted && f.mother_name.errors">
+                    <div *ngIf="submitted && f.mother_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.mother_name.errors.required"> {{ lan.field_required }} </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="text-center mt-3">
+                    <i ripple>
+                        <input type="image" src="{{ imgURL }}" style="width: 90px; height: 90px;" viewBox="0 0 24 24">
+                        <p style="color:#1386F6;" [ngClass]="['imgBot', ft_sm]"> {{ lan.add_photo }}
+                            <br />
+                            <b style="color:rgb(99, 231, 99);" [ngClass]="['imgBot', ft_sm]" >{{image_message}}</b>
+                            <br />
+                            <b style="color:rgb(219, 79, 79);" [ngClass]="['imgBot', ft_sm]">{{img_error}}</b>
+                        </p>
+                        <input name="personal_photo" type="file" id="my_file" #file
+                            accept="application/x-zip-compressed,image/*" (change)="onFileSelected($event)"
+                            (change)="preview(file.files)" class="form-control-file frm-txt" aria-describedby="fileHelp"
+                            style="display: none">
+                    </i>
+                </div>
+                <input type="hidden" formControlName="application_no">
+            </div>
+
+        
+                
+
+
+
+        </div>
+
+
+     </form>
+
+    <br>
+    <div class="text-center">
+        <!-- <label class="btn text-primary" style="font-size: 14px; font-family: Roboto;" (click)="reset()">Reset</label> -->
+        <br>
+        <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="cancel()"> {{ lan.cancel }} </button>
+        <button type="button" [ngClass]="['btn', continue, ft_md]" (click)="passportDetails()"> {{lan.save_continue }}
+        </button>
+    </div>
+    <br>
+
+</div>
+
+
+<app-user-footer></app-user-footer>

@@ -1,0 +1,88 @@
+<app-font-set ></app-font-set>
+
+<app-user-head  pgName="Application form"></app-user-head>
+<app-big-header [number]=2 [application_id]='application_id' [_id]='_id' [userName]="userName"></app-big-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div>
+  <div [ngClass]="['container', diff]">
+
+    <form [formGroup]="passportForm" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}"> {{ lan.passport_no }}
+              <span style="color: red">
+                *</span></label>
+            <input type="text" autocomplete="off" txtLeft [ngClass]="['form-control frm-inside-txt', ft_md]"
+              formControlName="passport_number" minlength="1" maxlength="10"
+              [class.is-invalid]='submitted && f. passport_number.errors'>
+            <div *ngIf="submitted && f. passport_number.errors" class="invalid-feedback">
+              <div *ngIf="f. passport_number.errors.required"> {{ lan.field_required }} </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}"> {{ lan.place_of_issue }}
+              <span style="color: red">
+                *</span></label>
+            <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" autocomplete="off" txtLeft
+              formControlName="passport_issue_place" [class.is-invalid]='submitted && f.passport_issue_place.errors'>
+            <div *ngIf="submitted && f.passport_issue_place.errors" class="invalid-feedback">
+              <div *ngIf="f.passport_issue_place.errors.required"> {{ lan.field_required }} </div>
+            </div>
+          </div>
+          <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}"> {{ lan.expiry_date }}
+            <span style="color: red">
+              *</span></label>
+
+          <div class="form-group input-group">
+            <input type="text" bsDatepicker autocomplete="off"  [ngClass]="['form-control frm-inside-txt', ft_md]"
+              formControlName="passport_expire_date" [(bsValue)]="passport_expire_date"
+              (ngModelChange)="dateChk(passportForm.value.passport_expire_date)"
+              value="{{ passport_expire_date | date:'dd-MM-yyyy' }}"
+              [class.is-invalid]='submitted && (f.passport_expire_date.errors || !dateStatus)'>
+
+            <div class="input-group-append">
+              <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+            </div>
+            <div *ngIf="submitted && f.passport_expire_date.errors" class="invalid-feedback">
+              <div *ngIf="f.passport_expire_date.errors.required"> {{ lan.field_required }} </div>
+            </div>
+            <div *ngIf="submitted && !dateStatus" class="invalid-feedback">
+              <div> {{ lan.valid_date_of_birth }}</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="text-center mt-3">
+            <i ripple>
+              <input id="imageid" type="image" src="{{ imgURL }}" style="width:90px; height: 90px;" viewBox="0 0 24 24">
+              <input type="file" name="passport_photo" id="my_file" accept="application/x-zip-compressed,image/*"
+                (change)="onFileSelected($event)" #file (change)="preview(file.files)" class="form-control-file"
+                aria-describedby="fileHelp" style="display: none">
+            </i>
+            <h3 style="color:#4a90e2;" [ngClass]="[ft_sm]"> {{ lan.attach_passport }} </h3>
+            <h3 style="color: rgba(0, 128, 0, 0.562);" [ngClass]="[ft_sm]"> {{ img_sucess }} </h3>
+            <h3 style="color: rgba(255, 0, 0, 0.527);" [ngClass]="[ft_sm]">{{ img_error }}</h3>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <div class="text-center">
+      <!-- <label class="btn text-primary" style="font-size: 14px; font-family: Roboto;"
+          (click)="reset()"
+          >Reset</label> <br> -->
+      <button type="button" [ngClass]="['btn mr-3', continue]" (click)="back()"> {{ lan.back}} </button>
+      <button type="button" [ngClass]="['btn mr-3', continue]" (click)="cancel()">{{ lan.cancel }}</button>
+      <button type="button" [ngClass]="['btn', continue]" (click)="onSubmit()"> {{lan.save_continue }} </button>
+
+
+    </div>
+    <br />
+  </div>
+</div>
+<app-user-footer></app-user-footer>

@@ -1,0 +1,319 @@
+<app-font-set (childEvent)="message=$event" (bg)="bg=$event" (language)="language=$event"></app-font-set>
+
+<app-user-head [userName]="userName" [_id]="_id" pgName="{{ lan.document_upload }}"></app-user-head>
+
+<div class="container-fluid" style="background-color: #f5f5f5;">
+  <div class="container py-3 d-flex  align-items-center">
+    <div (click)="goToPassport()" *ngIf="passport_remark" class="d-flex flex-wrap align-items-center">
+      <label
+        [ngClass]="['back_Set deselect d-flex align-items-center justify-content-center', ft_md, bg_color]">1</label>
+      <p [ngClass]="['setTxt', setTxt, ft_md]"> {{ lan.passport_upload }} </p>
+    </div>
+    <div class="d-flex flex-wrap align-items-center">
+      <label [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">2</label>
+      <p [ngClass]="['setTxt', setTxt, ft_md]"> {{ lan.document_upload }} </p>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+
+<div class="container-fluid px-0">
+
+    <div class="container mb-4">
+
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <p [ngClass]="['upload mb-2', ft_md]" > {{ lan.upload_mandatory_document }} </p>
+            <table class="table table-striped border">
+              <thead>
+                <tr [ngClass]="['tblHead txt-white', ft_md, bg_color]">
+                  <th> {{ lan.document_name }} </th>
+                  <th style="text-align: center;"> {{ lan.upload_date }} </th>
+                  <th style="text-align: center;"> {{ lan.upload_id_proof }} </th>
+                  <th style="text-align: center;"> {{ lan.view_document }} </th>
+                  <th style="text-align: center;"> {{ lan.remark }} </th>
+                </tr>
+              </thead>
+              <tbody [ngClass]="['text-center, body-white', ft_sm]">
+                <tr  class="text-center" [hidden]="!behalf" [className]="affidavit_photo_remark ? 'error' : 'rowdata'">
+                  <td style="text-align: left;"> {{ lan.affidavit_ }} </td>
+                  <td >{{ mandatory_date.affidavit_upload_date | date: 'dd/MM/yyyy' }} </td>
+    
+                  <td>
+                    <label class="m-0 p-0" *ngIf="mandatory_img.affidavit_photo;"> {{ mandatory_img.affidavit_photo }}
+                    </label>
+    
+                    <input type="button" id="btnFileUpload" value="{{ btn_afflict }}"  [ngClass]="['btn p-0 seleced', ft_sm]" />
+    
+                    <input type="file" id="FileUpload1" name="affidavit_photo" #filesss
+                      accept="application/x-zip-compressed,image/*" (change)="preview(filesss.files, 2)"
+                      (change)="onFileSelected($event, 2)" class="form-control-file txtLeft" aria-describedby="fileHelp"
+                      style="display: none;" />
+    
+    
+                  </td>
+    
+                  <td class="seleced"
+                    (click)="popUpModel(content, affidavitImg, mandatory_img.affidavit_photo, 'deleteAffidavitImage', null)"> {{ lan.view_document }} </td>
+                  <td> {{ affidavit_photo_remark }} </td>
+    
+                </tr>
+                <tr [hidden]="!call_letter" class="text-center" [className]="callletter_photo_remark ? 'error' : 'rowdata'">
+    
+                  <td style="text-align: left;"> {{ lan.call_letter }}</td>
+                  <td > {{ mandatory_date.callletter_upload_date  | date: 'dd/MM/yyyy'}}</td>
+                  <td>
+                    <label class="m-0 p-0"> {{ mandatory_img.callletter_photo }} </label>
+                    <input type="button" id="btnFileUpload1" value="{{ btn_callLetter }}" [ngClass]="['btn p-0 seleced', ft_sm]" />
+                    <input type="file" id="FileUpload2" name="callletter_photo" #filess
+                      accept="application/x-zip-compressed,image/*" (change)="preview(filess.files, 3)"
+                      (change)="onFileSelected($event, 3)" class="form-control-file" aria-describedby="fileHelp"
+                      style="display: none;" />
+                  </td>
+    
+                  <td class="seleced"
+                    (click)="popUpModel(content, callLetterImg, mandatory_img.callletter_photo, 'deleteCallLetterImage', null)">
+                    {{ lan.view_document }} </td>
+
+                    <td> {{ callletter_photo_remark }} </td>
+    
+                </tr>
+                <tr class="text-center" [hidden]="!foreigner" [className]="visa_photo_remark ? 'error' : 'rowdata'">
+    
+                  <td style="text-align: left;"> {{ lan.visa_ }} </td>
+                  <td> {{ mandatory_date.visa_upload_date  | date: 'dd/MM/yyyy'}} </td>
+                 
+                  <td>
+                    <label class="m-0 p-0"> {{ mandatory_img.visa_photo }} </label>
+                    <input type="button" id="btnFileUpload2" value="{{ btn_visa }}" [ngClass]="['btn p-0 seleced', ft_sm]" />
+                    <input type="file" id="FileUpload3" name="visa_photo" accept="application/x-zip-compressed,image/*"
+                      (change)="preview(file.files, 4)" #file (change)="onFileSelected($event, 4)" class="form-control-file"
+                      aria-describedby="fileHelp" style="display: none;">
+    
+                  </td>
+                  <td class="seleced" (click)="popUpModel(content, visaImg, mandatory_img.visa_photo, 'deleteVisaImage', null)">
+                    {{ lan.view_document }}</td>
+                    <td> {{ visa_photo_remark }} </td>
+                </tr>
+    
+              </tbody>
+    
+            </table>
+          </div>
+        </div>
+      </div>
+    
+  <hr>
+
+  <form [formGroup]="uploadForm" enctype="multipart/form-data">
+    <div class="container">
+
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-3">
+            <p [ngClass]="['upload', ft_md]" > {{ lan.upload_documents }} </p>
+          </div>
+        </div>
+  
+        <div class="row">
+          <!-- <div class="col-md-1"> </div> -->
+          <div class="col-md-1"></div>
+          <div class="col-md-3">
+              <div class="form-group">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top"  ngbTooltip="{{lan.tooltip}}"> {{ lan.Type_of_Document }} 
+                    <span style="color: red">
+                      *</span></label>
+                  <input type="text" formControlName="Type_of_Document" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                     [class.is-invalid]="submitted && f.Type_of_Document.errors">
+      
+                  <div *ngIf="submitted && f.Type_of_Document.errors" class="invalid-feedback">
+                    <div *ngIf="f.Type_of_Document.errors.required"> {{ lan.please_enter}} {{ lan.Type_of_Document }} </div>
+                  </div>
+                </div>
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top"  ngbTooltip="{{lan.tooltip}}"> {{ lan.certificate_number }} <span style="color: red">
+                  *</span></label>
+              <input type="email" formControlName="certificate_no" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                 [class.is-invalid]="submitted && f.certificate_no.errors">
+  
+              <div *ngIf="submitted && f.certificate_no.errors" class="invalid-feedback">
+                <div *ngIf="f.certificate_no.errors.required"> {{ lan.please_enter}} {{ lan.certificate_number }} </div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top"  ngbTooltip="{{lan.tooltip}}"> {{ lan.year }} <span style="color: red">
+                  *</span></label>
+              <select formControlName="year" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                 [class.is-invalid]="submitted && f.year.errors" placeholder="Year">
+                <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+  
+              </select>
+              <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                <div *ngIf="f.year.errors.required"> {{ lan.please_select}} {{ lan.year}} </div>
+              </div>
+              <div [hidden]="!uploadForm.value.year" class="invalid-feedback">
+                <div *ngIf="!f.year.valid"> {{ lan.year}} {{ lan.not_valid}} </div>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="col-md-4">
+  
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top"  ngbTooltip="{{lan.tooltip}}"> {{ lan.name_of_the_examination }} <span
+                  style="color: red">
+                  *</span></label>
+              <input type="email" formControlName="name_of_exam" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                 [class.is-invalid]="submitted && f.name_of_exam.errors">
+  
+              <div *ngIf="submitted && f.name_of_exam.errors" class="invalid-feedback">
+                <div *ngIf="f.name_of_exam.errors.required"> {{ lan.please_select}} {{ lan.name_of_the_examination}} </div>
+              </div>
+            </div>
+  
+  
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top"  ngbTooltip="{{lan.tooltip}}"> {{ lan.name_of_the_university_txt }} <span style="color:red"> *</span></label>
+  
+              <select formControlName="name_of_institute" [ngClass]="['form-control frm-inside-txt', ft_md]"
+              (change)="universityChange($event.target.value)"
+                 [class.is-invalid]="submitted && f.name_of_institute.errors" placeholder="Type Of User">
+                <option *ngFor="let university of universitys" value="{{university}}">{{university}}</option>
+             
+              </select>
+              <div *ngIf="submitted && f.name_of_institute.errors" class="invalid-feedback">
+                <div *ngIf="f.name_of_institute.errors.required"> {{ lan.please_select }} </div>
+              </div>
+            </div>
+
+            <div [hidden]="!other"  class="form-group">
+                <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > Name of the University <span style="color:red"> *</span></label>
+                <input type="text" formControlName="Other"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    pattern="[a-zA-Z][a-zA-Z ]+"
+                   [class.is-invalid]='submitted && f.Other.errors' required="{{other}}">
+                <div *ngIf="submitted && f.Other.errors" class="invalid-feedback">
+                   <div *ngIf="f.Other.errors.required">Please enter the university name</div>
+                </div>
+
+
+             </div>
+  
+          </div>
+          <div class="col-md-3">
+            <div class="text-center mt-3">
+              <i ripple>
+                <input type="image" src="assets/img/passport_img.png" width=90 height=90 viewBox="0 0 24 24">
+  
+                <input type="file" name="certificate_photo" #files id="my_file"
+                  accept="application/x-zip-compressed,image/*" (change)="onFileSelected($event, 1)"
+                  (change)="preview(files.files, 1)" class="form-control-file" aria-describedby="fileHelp"
+                  style='display:none'> </i>
+              <p [ngClass]="['m-0', ft_sm]" style="color: #4a90e2;"> {{ lan.upload_documents}} </p>
+              <p [ngClass]="['m-0', ft_sm]" style="color: green; font-family: Roboto;"> {{ img_success }}</p>
+              <p [ngClass]="['m-0', ft_sm]" style="color: red; font-family: Roboto;"> {{ img_error}} </p>
+  
+            </div>
+          </div>
+        </div>
+  
+
+  
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-3">
+            <div class="text-left">
+  
+              <button type="submit" [ngClass]="['btn', continue, ft_md]" (click)="contactDetails()"> {{ lan.add_certificate }}
+              </button>
+              <input type="hidden" formControlName="application_no">
+            </div>
+          </div>
+      </div>
+  
+  
+      </div>
+
+    <br>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+
+          <table class="table table-striped bg-white border text-center">
+            <thead>
+              <tr [ngClass]="['tblHead txt-white', ft_md, bg_color]">
+                <th> {{ lan.certificate_number }} </th>
+                <th> {{ lan.Examination }} </th>
+                <th> {{ lan.name_of_the_university_tbl }} </th>
+                <th> {{ lan.year }} </th>
+                <th> {{ lan.name_of_image }} </th>
+                <th> {{ lan.view_document }} </th>
+                <th>{{ lan.remark }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr [ngClass]="[ft_sm]" *ngFor="let data of collegeList ;  let i = index">
+                <!-- <th scope="row">{{i+1}}</th> -->
+                <td [className]="data.certificate_photo_remark ? 'error' : 'rowdata'">
+                  {{data.certificate_no }}</td>
+                <td [className]="data.certificate_photo_remark ? 'error' : 'rowdata'">{{data.name_of_exam }}
+                </td>
+                <td [className]="data.certificate_photo_remark ? 'error' : 'rowdata'">
+                  {{data.name_of_institute }}</td>
+                <td [className]="data.certificate_photo_remark ? 'error' : 'rowdata'">{{data.year }}</td>
+                <td [className]="data.certificate_photo_remark ? 'error' : 'rowdata'">{{data.imgName }}</td>
+                <td style="color: #4a90e2; cursor: pointer;"
+                  (click)="popUpModel(content, data.certificate_photo, data.imgName, data.certificate_no, i)"> {{ lan.view_document}}
+                </td>
+                <td [className]="data.certificate_photo_remark ? 'error ft-sm' : 'rowdata ft-sm'">
+                  {{ data.certificate_photo_remark }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <br>
+
+    <div class="text-center">
+      <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="goToPassport()"> {{ lan.back}} </button>
+      <button type="button"[ngClass]="['btn mr-3', continue, ft_md]" (click)="cancel()"> {{ lan.cancel}} </button>
+      <button type="button" [ngClass]="['btn', continue, ft_md]" (click)="onSubmit()"> {{ lan.submit }} </button>
+    </div>
+    <br>
+  </form>
+</div>
+
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title ft-md" id="modal-basic-title">{{imgName}}</h4>
+    <div class="d-flex">
+      <span class="ft-md mr-3 point" (click)="deleteDocument()" (click)="modal.dismiss('Cross click')"> <i
+          class="fa fa-trash-o" style="color:red; font-size: 14px;"></i> Delete </span>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <input type="image" *ngIf="format != 'pdf'" style="width: 100%; height: auto;" [src]="imgURL">
+    <iframe *ngIf="format == 'pdf'" [src]="imgURL" style="width: 100%; height:70vh;"></iframe>
+  </div>
+
+</ng-template>
+<app-user-footer></app-user-footer>

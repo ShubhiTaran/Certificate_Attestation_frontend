@@ -1,0 +1,51 @@
+<div [ngClass]="['container-fluid global-bor', bg_color]">
+
+  <div class="row">
+    <div class="col-md-1 d-flex justify-content-end align-items-center">
+      <img style="height: 50px; width: auto; cursor: pointer;" (click)="home()" src="assets/img/mlogo2.png" />
+    </div>
+
+    <div class="col-md-7 d-flex align-items-center">
+      <div class="txt-white">
+        <p [ngClass]="['m-0', ft_xl]" style="font-weight: bold;">{{ lan.document_attestation_system }}</p>
+        <div [ngClass]="['d-flex', ft_sm]">
+          <p class="m-0 point" (click)="home()"> {{ lan.home }} </p>
+          <p class="m-0 pl-2 ">></p>
+          <p class="m-0 pl-2 point">{{pgName}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 p-0">
+
+      <div class="d-flex align-items-center justify-content-end">
+        <div>
+          <div (click)="newAccount()">
+            <img class="mr-2 iconSetRounded" src="assets/img/plus1.png" />
+            <label  [ngClass]="['m-0 p-0 point txt-white', ft_md]"> {{ lan.add_new_account }} </label>
+          </div>
+        </div>
+
+        <div ngbDropdown placement="bottom-right" class="d-inline-block ml-4">
+            <label class="name ft-md" id="dropdownBasic1" [ngClass]="['txt-white', ft_md]" ngbDropdownToggle> {{ userName }} </label>
+            <div class="setBorder" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            
+                <div (click)="updatePassword('../admin-password-update')" ngbDropdownItem>
+                  <img class="mr-2 iconSet" src="assets/img/groupp.png" />
+                  <label class="m-0 p-0"> Change Password </label>
+                </div>
+            
+              <div routerLink="/dashboard" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/logout.png" />
+              <label class="m-0 p-0"> {{ lan.logout }} </label>
+            </div>
+          </div>
+        </div>
+        <div class="ml-4" style="background-color:white">
+          <img class="m-2" style="height: 50px; width: auto; cursor: pointer;" (click)="home()"
+            src="assets/img/mahait-logo.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

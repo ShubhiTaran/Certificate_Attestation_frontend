@@ -1,0 +1,132 @@
+<app-font-set></app-font-set>
+<app-user-head pgName="Mandatory Documents"></app-user-head>
+
+<br>
+<div [ngClass]="['container', diff]">
+  <p [ngClass]="['top_head', ft_xl]">Mandatory Documents</p>
+  <div>
+
+
+    <p [ngClass]="['parent', ft_xl]"> For Foreigners/NRI:</p>
+    <ul>
+      <p [ngClass]="['child', ft_md]">
+        <li><b> Passport(Original & Photocopy)</b></li>
+      </p>
+      <p [ngClass]="['child', ft_md]">
+        <li>If the validity of the old Passport has expired (delayed application for authentication), photo copy of the
+          old Passport and Stay VISA which was valid for the duration of the academic course should be submitted.</li>
+      </p>
+      <p [ngClass]="['child', ft_md]">
+        <li> VISA</li>
+      </p>
+      <ul [ngClass]="[ft_sm]" style="list-style-type:square;">
+        <li>If the candidate is unable to come personally, the person visiting onbehalf of the student should bring
+          authority letter on Rs.100 stamppaper.</li>
+        <li>The authority letter should be sent back to the student for signature. The receipts of these postal/ courier
+          transactions should be preserved and submitted along with other documents.</li>
+
+        <li>In such case photo identity proof of the authorized person (e.g. Passport,Aadhar card, PAN card) should also
+          be submitted and original should alsobe brought for verification. </li>
+        <li>Passport size photographs of both the student and the authorized person should be affixed on the authority
+          letter (if process carried out by the authorized person on behalf of the applicant).<span
+            style="color: blue">Size of photo (max 10kb)</span></li>
+        <li>A person can be authorized to get authentication for only one student
+      </ul> <br>
+      <p [ngClass]="['child', ft_md]">
+        <li><b> Check list for necessary documents for Foreign Students:</b></li>
+      </p>
+      <ul [ngClass]="[ft_sm]" style="list-style-type:square;">
+
+
+        <li> University Authentication on all certificates</li>
+
+        <li> Authentication on all certificates by Notary</li>
+        <li>Home Department Authentication on all certificates</li>
+        <li>Students Passport size color photograph</li>
+        <li> Student’s Passport</li>
+        <li>Student’s old passport (delayed application for authentication, if applicant comes for certificate
+          authentication at a later stage after going back to his/her home country)</li>
+        # Student’s Stay VISA/Stay VISA extension
+        <li> Student’s Old Stay VISA (delayed application for authentication, if applicant comes for certificate
+          authentication at a later stage after going back to his/her home country)</li>
+        # Authority letter on Rs. 100 Stamp Paper (with photograph of candidate and authority)<br>
+        # Photo ID proof of authorized person<br>
+        # Passport size color photograph of Authorized person<span style="color: blue">Size of photo (max
+          10kb)</span><br>
+        # Mail/courier transaction proof <br>
+        # Required only if process done by authorized person on behalf of candidate
+      </ul>
+    </ul><br>
+
+    <p [ngClass]="['parent', ft_xl]"> For Indian National:</p>
+    <ul>
+      <p [ngClass]="['child', ft_md]">
+        <li><b>Passport(Original & Photocopy)</b></li>
+      </p>
+
+
+
+      <p [ngClass]="['child', ft_md]">
+        <li> If the candidate is unable to come personally, the person visiting on behalf of thestudent should bring
+          authority letter on Rs.100 stamp paper *</li>
+      </p>
+      <ul [ngClass]="[ft_sm]" style="list-style-type:square;">
+        <li>In such case photo identity proof of the authorized person (e.g.Passport, Aadhar card, PAN card) should also
+          be submitted, and original should also be brought for verification.</li>
+        <li>Passport size photographs of both the student and the authorized person should be affixed on the authority
+          letter (if process carried outby the authorized person on behalf of the applicant).</li>
+        <li>If the candidate is currently studying abroad, photo copy of VISA shouldalso be submitted.</li>
+        <li>A person can be authorized to get authentication for only one student</li>
+      </ul><br>
+
+      <p [ngClass]="['child', ft_md]">
+        <li><b> Checklist of Documents for Indian Students</b></li>
+      </p>
+      <ul [ngClass]="[ft_sm]" style="list-style-type:square;">
+        <li>Board /University Authentication on all certificates</li>
+        <li>Authentication on all certificates by Notary</li>
+        <li>Home Department Authentication on all certificates</li>
+        <li>Students Passport size color photograph Student’s Passport Student’s VISA / Declaration letter mentioning
+          VISA to be obtained in future for Higher Education</li>
+        <li> Offer letter by Foreign University</li>
+        # Authority letter on Rs.100 stamp paper (with photograph of candidate and authority)
+        # Photo ID proof of authorized person
+        # Passport size color photograph of Authorized person<span style="color: blue">Size of photo (max 10kb)</span>
+      </ul>
+    </ul>
+
+
+
+    <p [ngClass]="['parent', ft_xl]"> On Behalf:</p>
+    <div [ngClass]="[ft_sm, 'ml-4']">
+      <p [ngClass]="[ft_md]"><b> To whom it may concern </b></p>
+      <p>I, <span class="setRed"> (Name of Applicant) </span> hereby authorize
+        <span class="setRed"> Mr. /Ms. (Name of Authorized Person) </span> for collecting Authentication for
+        following documents in my absence as I am unable to attend due to
+        <span class="setRed"> (Reason of Absence). </span></p>
+
+      <ol class="setRed">
+        <li>Document title 1.</li>
+        <li>Document title 2.</li>
+        <li> Document title 3. </li>
+      </ol>
+
+      <p>I have no objection in <span class="setRed"> Mr. /Ms. (Name of Authorized Person) </span> signing any required Forms/ Document/ Letter in my
+        absence and he/she is authorized to collect the Authenticated Certificates as mentioned above from respective
+        authority on my behalf.</p>
+
+        <p class="m-0">Yours Sincerely,</p>
+        <p class="setRed">(Name of Applicant)</p>
+
+        <div  class="d-flex mx-4 justify-content-between text-center">
+          <p class="setImgbor d-flex align-items-center">Photograph of Applicant with Sign</p>
+          <p class="setImgbor d-flex align-items-center">Photograph of Authorized Person with Sign</p>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+<br>
+<app-user-footer></app-user-footer>

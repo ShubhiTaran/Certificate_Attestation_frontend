@@ -1,0 +1,22 @@
+<div [ngClass]="['container-fluid py-2 setfooter global-bor', ft_sm, bg_color]" >
+  <div class="d-flex justify-content-center mb-1">
+    <p (click)="routing('../deputy-sec-dashboard')" class="navHome txt-white"> {{lan.home }} </p>
+    <!-- <span class="navHome  txt-white">|</span>
+    <p (click)="routing('../do-site-map')" class="navHome  txt-white"> {{lan.sitemap}} </p> -->
+    <span class="navHome  txt-white">|</span>
+    <p  (click)="routing('../ds-contact-us')" class="navHome txt-white "> {{lan.contact_us}} </p>
+    <span class="navHome  txt-white">|</span>
+    <p (click)="routing('../ds-faq')" class="navHome txt-white "> {{lan.faq}} </p>
+    <!-- <span class="navHome  txt-white">|</span>
+    <p (click)="routing('../ds-help-center')" class="navHome txt-white "> {{lan.help_center}} </p> -->
+  </div>
+  <p class="byContinue txt-white"> 
+      By continuing past this page, you agree to our 
+      <span class="ancher" (click)="routing('../ds-terms-condition')"> Terms of Service </span> ,
+       and <span class="ancher" (click)="routing('../ds-policies')"> Privacy Policy </span> . © 2019
+  </p>
+</div>
+
+
+
+

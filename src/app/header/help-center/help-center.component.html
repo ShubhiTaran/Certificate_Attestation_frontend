@@ -1,0 +1,87 @@
+<br>
+<ngx-ui-loader></ngx-ui-loader>
+<div [ngClass]="['container-fluid', diff]">
+  <form name="form" [ngClass]="[ft_sm]" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <div> <label> {{ lan.email_id }} :</label> <span style="color:red"> *</span> </div>
+          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="emial_id"
+            [(ngModel)]="model.emial_id" #emial_id="ngModel" autocomplete="off"
+            [class.is-invalid]='f.submitted && (emial_id.invalid)' required />
+
+          <div *ngIf="f.submitted && emial_id.invalid" class="invalid-feedback">
+            <div *ngIf="emial_id.errors.required"> Please enter valid email id </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div> <label> Subject :</label> <span style="color:red"> *</span> </div>
+          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="subject"
+            [(ngModel)]="model.subject" #subject="ngModel" autocomplete="off"
+            [class.is-invalid]='f.submitted && (subject.invalid)' required />
+
+          <div *ngIf="f.submitted && subject.invalid" class="invalid-feedback">
+            <div *ngIf="subject.errors.required"> Please enter subject </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <div> <label> Contact no :</label> <span style="color:red"> *</span> </div>
+          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="contact_no" maxlength="10"
+            minlength="10" [(ngModel)]="model.contact_no" #contact_no="ngModel" autocomplete="off"
+            (keyup)="phone_number()" [class.is-invalid]='f.submitted && (contact_no.invalid)' required />
+
+          <div *ngIf="f.submitted && contact_no.invalid" class="invalid-feedback">
+            <div *ngIf="contact_no.errors.required"> Please enter Contact number</div>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <div> <label> Upload PDF (if Any) :</label> </div>
+          <div class="custom-file">
+            <input type="file"class="custom-file-input" name="passport_photo" 
+            accept="application/x-zip-compressed,image/*"
+              (change)="onFileSelected($event)" #file 
+              aria-describedby="fileHelp">
+              <label class="custom-file-label" for="inputGroupFile01">{{ imgName }}</label>
+          </div>
+
+
+        </div> -->
+
+      </div>
+
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class=" form-group">
+          <div> <label> Message :</label> <span style="color:red"> *</span> </div>
+          <textarea rows="3" [ngClass]="['form-control frm-inside-txt', ft_md]" name="message"
+            [(ngModel)]="model.message" #message="ngModel" autocomplete="off"
+            [class.is-invalid]='f.submitted && (message.invalid)' required></textarea>
+
+          <div *ngIf="f.submitted && message.invalid" class="invalid-feedback">
+            <div *ngIf="message.errors.required"> Plese enter your message </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="text-center">
+      <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" [routerLink]="['/dashboard']" > {{ lan.cancel }}
+      </button>
+      <button type="submit" [ngClass]="['btn', continue, ft_md]"> Send </button>
+    </div>
+  </form>
+</div>

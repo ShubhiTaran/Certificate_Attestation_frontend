@@ -1,0 +1,49 @@
+<br>
+
+<div [ngClass]="['container-fluid', diff]" >
+  <div class="row">
+    <div class="col-md-1"></div>
+      <div class="col-md-10"> 
+      <p [ngClass]="[ft_xl]" ><strong> Search Site</strong>
+          You are searching for this word : {{ search }} </p>
+
+          <div>
+            <div [hidden]="!faq" class="border p-3">
+            <p (click)="navigate('faq')" class="dec">Guidelines for Attestation</p>
+            <p class="m-0">Information about Guidelines for Attestation </p>
+          </div>
+<br>
+<div  [hidden]="!terms_service" class="border p-3">
+    <p (click)="navigate('terms-condition')"  class="dec"> Terms of Service</p>
+    <p class="m-0">Information about  Terms of Service </p>
+  </div>
+
+  <br>
+<div  [hidden]="!policy" class="border p-3">
+    <p (click)="navigate('policies')"  class="dec">  Privacy Policy</p>
+    <p class="m-0">Information about  Privacy Policy </p>
+  </div>
+
+  <br>
+<div  [hidden]="!contact_us" class="border p-3">
+    <p (click)="navigate('contact-us')"  class="dec"> Contact us</p>
+    <p class="m-0">Information about   Contact us </p>
+  </div>
+
+  <br>
+<!-- <div  [hidden]="!help_center" class="border p-3">
+    <p (click)="navigate('help-center')"  class="dec"> Help center</p>
+    <p class="m-0">Information about Help center </p>
+  </div> -->
+
+  <div  [hidden]="!notmach" class="border p-3">
+      <!-- <p  class="dec"> Help center</p> -->
+      <p class="m-0">Your search content not matching </p>
+    </div>
+  <br>
+
+
+          </div>
+      </div>
+  </div>
+</div>

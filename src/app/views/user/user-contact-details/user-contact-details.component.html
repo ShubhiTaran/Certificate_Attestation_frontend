@@ -1,0 +1,346 @@
+<app-font-set ></app-font-set>
+<app-user-head pgName="Application form"></app-user-head>
+<app-big-header [number]=3 [application_id]='application_id' [_id]='_id' [userName]="userName"></app-big-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div [ngClass]="['container', diff]">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <label [ngClass]="['m-0', ft_md]" style="font-weight: 600;">Present Address</label>
+      </div>
+      <div class="col-md-5 d-flex justify-content-between align-items-center">
+        <label [ngClass]="['m-0', ft_md]" style="font-weight: 600;">Permanent Address</label>
+        <div class="custom-control custom-checkbox d-flex align-items-center">
+          <input type="checkbox" class="custom-control-input" (change)="chkBoxChange($event)" id="yourBox">
+          <label [ngClass]="['custom-control-label m-0', ft_md]" for="yourBox">Same as a present address</label>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.house_number }} <span style="color: red">
+                  *</span></label>
+              <input type="text" name="present_house_no" [ngClass]="['form-control frm-inside-txt', ft_md]" #present_house_no="ngModel"
+                [(ngModel)]="model.present_house_no" autocomplete="off"
+               [class.is-invalid]="f.submitted && present_house_no.invalid" required>
+
+              <div *ngIf="f.submitted && present_house_no.invalid" class="invalid-feedback">
+                <div *ngIf="present_house_no.errors.required"> {{lan.please_enter }} {{ lan.house_number }}  </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{lan.country}} <span style="color: red">
+                  *</span></label>
+              <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PresentOnChangeCountry()" #present_country="ngModel"
+                name="present_country" [(ngModel)]="model.present_country"
+               [class.is-invalid]="f.submitted && present_country.invalid" required>
+                <!-- <option value="">Select country...</option> -->
+                <option *ngFor="let countries of present_countryList" [value]="countries.name">{{countries.name}}
+                </option>
+
+              </select>
+              <div *ngIf="f.submitted && present_country.invalid" class="invalid-feedback">
+                <div *ngIf="present_country.errors.required"> {{lan.please_select}} {{lan.country}} </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{lan.city}}  <span style="color: red">
+                  *</span></label>
+              <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PresentOnChangeCity()" #present_city="ngModel"
+                name="present_city" [(ngModel)]="model.present_city"
+               [class.is-invalid]="f.submitted && present_city.invalid" required>
+                <!-- <option value="">Select country...</option> -->
+                <option *ngFor="let city of present_cityList" [value]="city.name">{{city.name}}</option>
+
+              </select>
+              <div *ngIf="f.submitted && present_city.invalid" class="invalid-feedback">
+                <div *ngIf="present_city.errors.required"> {{lan.please_select}} {{lan.city}} </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{lan.street_number }} <span style="color: red">
+                  *</span></label>
+              <input type="text" name="present_street_no" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                #present_street_no="ngModel" [(ngModel)]="model.present_street_no" autocomplete="off"
+               [class.is-invalid]="f.submitted && present_street_no.invalid" required>
+
+              <div *ngIf="f.submitted && present_street_no.invalid" class="invalid-feedback">
+                <div *ngIf="present_street_no.errors.required"> {{lan.please_enter}} {{lan.street_number}} </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{lan.state}} <span style="color: red">
+                  *</span></label>
+              <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PresentOnChangeState()" #present_state="ngModel"
+                name="present_state" [(ngModel)]="model.present_state"
+               [class.is-invalid]="f.submitted && present_state.invalid" required>
+                <!-- <option value="">Select country...</option> -->
+                <option *ngFor="let state of present_stateList" [value]="state.name">{{state.name}}</option>
+
+              </select>
+              <div *ngIf="f.submitted && present_state.invalid" class="invalid-feedback">
+                <div *ngIf="present_state.errors.required"> {{lan.please_select}} {{lan.state}} </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{lan.pincode}} <span style="color: red">
+                  *</span></label>
+              <input type="text" name="present_pincode" [ngClass]="['form-control frm-inside-txt', ft_md]" #present_pincode='ngModel'
+                [(ngModel)]="model.present_pincode" autocomplete="off" (keyup)="present_pincode_()" minlength="3"
+                maxlength="10"[class.is-invalid]="f.submitted && present_pincode.invalid" required>
+
+              <div *ngIf="f.submitted && present_pincode.invalid" class="invalid-feedback">
+                <div *ngIf="present_pincode.errors.required"> {{lan.not_valid}} {{lan.pincode}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+
+            <div class="form-group">
+                <label [ngClass]="['frm-txt', ft_sm]" for="mobile" placement="top" ngbTooltip="{{toolTip}}"> {{lan.mobile_number}} <span class="req"
+                    style="color: #f54b5e;"> * </span></label>
+      
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <select [ngClass]="['form-control frm-inside-txt', ft_md]" #present_phonecode="ngModel" name="present_phonecode"
+                      [(ngModel)]="model.present_phonecode"
+                     [class.is-invalid]="f.submitted && present_phonecode.invalid" required>
+                      <option value="">..</option>
+                      <option *ngFor="let country of present_countryList" [value]="country.phonecode">{{country.phonecode}}
+                      </option>
+                    </select>
+      
+                    <!-- <span class="input-group-text"> {{ present_country_code }} </span> -->
+                  </div>
+                  <div *ngIf="f.submitted && present_phonecode.invalid" class="invalid-feedback">
+                    <div *ngIf="present_phonecode.errors.required">Please Country code</div>
+                  </div>
+                  <input type="text" (keyup)="present_contactNo_no()" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    name="present_mobile" [(ngModel)]="model.present_mobile" #present_mobile="ngModel" autocomplete="off"
+                   [class.is-invalid]="f.submitted && present_mobile.invalid" required maxlength="10"
+                    minlength="10" />
+      
+                  <div *ngIf="f.submitted && present_mobile.invalid" class="invalid-feedback">
+                    <div *ngIf="present_mobile.errors.required"> {{lan.please_enter}} {{lan.mobile_number}} </div>
+                  </div>
+                  <div [hidden]="!model.present_mobile" class="invalid-feedback">
+                    <div *ngIf="!present_mobile.valid"> {{lan.mobile_number}} {{lan.not_valid}} </div>
+                  </div>
+                </div>
+      
+      
+      
+      
+              </div>
+      
+              <div class="form-group">
+                <label [ngClass]="['frm-txt', ft_sm]" for="present_email_id" placement="top" ngbTooltip="{{toolTip}}"> Alternate Email ID </label>
+                <input type="text" autocomplete="off" [ngClass]="['form-control frm-inside-txt', ft_md]" id="present_email_id"
+                  [(ngModel)]="model.present_email_id" name="present_email_id"
+                 [class.is-invalid]="f.submitted && present_email_id.invalid" #present_email_id="ngModel"
+                  [email]="true">
+      
+                <!-- <div *ngIf="f.submitted && present_email_id.invalid" class="invalid-feedback">
+                  <div *ngIf="present_email_id.errors.required"> {{lan.please_enter}} {{lan.email_id}} </div>
+                </div>
+      
+                <div *ngIf="model.present_email_id" class="invalid-feedback">
+                  <div *ngIf="!present_email_id.valid"> {{lan.email_id}} {{lan.not_valid}}   </div>
+                </div> -->
+              </div>
+
+
+        </div>
+      </div>
+      <!-- <div class="col-md-1"></div> -->
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-6">
+
+              <div class="form-group">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.house_number }} <span style="color: red">
+                      *</span></label>
+                  <input type="text" name="permanent_house_no" [ngClass]="['form-control frm-inside-txt', ft_md]" #permanent_house_no="ngModel"
+                    [(ngModel)]="model.permanent_house_no" autocomplete="off"
+                   [class.is-invalid]="f.submitted && permanent_house_no.invalid" required>
+        
+                  <div *ngIf="f.submitted && permanent_house_no.invalid" class="invalid-feedback">
+                    <div *ngIf="permanent_house_no.errors.required"> {{ lan.please_select}} {{ lan.house_number}}  </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.country }}  <span style="color: red">
+                        *</span></label>
+                    <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PermanentOnChangeCountry()" #permanent_country="ngModel"
+                      name="permanent_country" [(ngModel)]="model.permanent_country"
+                     [class.is-invalid]="f.submitted && permanent_country.invalid" required>
+                      <!-- <option value="">Select country...</option> -->
+                      <option *ngFor="let countries of permanent_countryList" [value]="countries.name">{{countries.name}}</option>
+          
+                    </select>
+                    <div *ngIf="f.submitted && permanent_country.invalid" class="invalid-feedback">
+                      <div *ngIf="permanent_country.errors.required"> {{ lan.please_select}} {{ lan.country}} </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.city}} <span style="color: red">
+                          *</span></label>
+                      <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PermanentOnChangeCity()" #permanent_city="ngModel"
+                        name="permanent_city" [(ngModel)]="model.permanent_city"
+                       [class.is-invalid]="f.submitted && permanent_city.invalid" required>
+                        <!-- <option value="">Select country...</option> -->
+                        <option *ngFor="let city of permanent_cityList" [value]="city.name">{{city.name}}</option>
+            
+                      </select>
+                      <div *ngIf="f.submitted && permanent_city.invalid" class="invalid-feedback">
+                        <div *ngIf="permanent_city.errors.required"> {{ lan.please_select}} {{ lan.city }} </div>
+                      </div>
+                    </div>
+
+          </div>
+          <div class="col-md-6">
+
+              <div class="form-group">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.street_number }} <span style="color: red">
+                      *</span></label>
+                  <input type="text" name="permanent_street_no" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    #permanent_street_no="ngModel" [(ngModel)]="model.permanent_street_no" autocomplete="off"
+                   [class.is-invalid]="f.submitted && permanent_street_no.invalid" required>
+        
+                  <div *ngIf="f.submitted && permanent_street_no.invalid" class="invalid-feedback">
+                    <div *ngIf="permanent_street_no.errors.required"> {{ lan.please_enter}} {{ lan.street_number}} </div>
+                  </div>
+                </div>
+        
+            
+                <div class="form-group">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.state}}  <span style="color: red">
+                      *</span></label>
+                  <select [ngClass]="['form-control frm-inside-txt', ft_md]" (change)="PermanentOnChangeState()" #permanent_state="ngModel"
+                    name="permanent_state" [(ngModel)]="model.permanent_state"
+                   [class.is-invalid]="f.submitted && permanent_state.invalid" required>
+                    <!-- <option value="">Select country...</option> -->
+                    <option *ngFor="let state of permanent_stateList" [value]="state.name">{{state.name}}</option>
+        
+                  </select>
+                  <div *ngIf="f.submitted && permanent_state.invalid" class="invalid-feedback">
+                    <div *ngIf="permanent_state.errors.required"> {{ lan.please_select}} {{ lan.state}} </div>
+                  </div>
+                </div>
+         
+        
+                <div class="form-group">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.pincode }} <span style="color: red">
+                      *</span></label>
+        
+                  <input type="text" name="permanent_pincode" [ngClass]="['form-control frm-inside-txt', ft_md]" #permanent_pincode='ngModel'
+                    [(ngModel)]="model.permanent_pincode" autocomplete="off" (keyup)="permanent_pincode_()" minlength="3"
+                    maxlength="10"[class.is-invalid]="f.submitted && permanent_pincode.invalid" required>
+        
+                  <div *ngIf="f.submitted && permanent_pincode.invalid" class="invalid-feedback">
+                    <div *ngIf="permanent_pincode.errors.required"> {{ lan.pincode}} {{ lan.not_valid}} </div>
+                  </div>
+                </div>
+
+          </div>
+        </div>
+
+        <div>
+
+            <div class="form-group">
+                <label [ngClass]="['frm-txt', ft_sm]" for="mobile" placement="top" ngbTooltip="{{toolTip}}"> {{ lan.mobile_number}} <span class="req"
+                    style="color: #f54b5e;">* </span></label>
+      
+                <div class="input-group mb-3">
+      
+                  <div class="input-group-append">
+                    <select [ngClass]="['form-control frm-inside-txt', ft_md]" #permanent_phonecode="ngModel" name="permanent_phonecode"
+                      [(ngModel)]="model.permanent_phonecode"
+                     [class.is-invalid]="f.submitted && permanent_phonecode.invalid" required>
+                      <option value="">..</option>
+                      <option *ngFor="let country of present_countryList" [value]="country.phonecode">{{country.phonecode}}
+                      </option>
+                    </select>
+                  </div>
+                  <input type="text" (keyup)="permanent_contactNo_no()" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    name="permanent_mobile" [(ngModel)]="model.permanent_mobile" #permanent_mobile="ngModel"
+                    autocomplete="off"[class.is-invalid]="f.submitted && permanent_mobile.invalid" required
+                    maxlength="10" minlength="10" />
+                </div>
+      
+                <div *ngIf="f.submitted && permanent_mobile.invalid" class="invalid-feedback">
+                  <div *ngIf="permanent_mobile.errors.required"> sdfs {{ lan.please_enter}} {{ lan.mobile_number }} </div>
+                </div>
+                <div [hidden]="!model.permanent_mobile" class="invalid-feedback">
+                  <div *ngIf="!permanent_mobile.valid"> {{ lan.mobile_number}} {{ lan.not_valid}} </div>
+                </div>
+      
+              </div>
+      
+              <div class="form-group">
+                <label [ngClass]="['frm-txt', ft_sm]" for="permanent_email_id" placement="top" ngbTooltip="{{toolTip}}"> Alternate Email ID  </label>
+                <input type="text" autocomplete="off" [ngClass]="['form-control frm-inside-txt', ft_md]" id="permanent_email_id"
+                  [(ngModel)]="model.permanent_email_id" name="permanent_email_id"
+                 [class.is-invalid]="f.submitted && permanent_email_id.invalid" #permanent_email_id="ngModel"
+                  [email]="true">
+      
+                <!-- <div *ngIf="f.submitted && permanent_email_id.invalid" class="invalid-feedback">
+                  <div *ngIf="permanent_email_id.errors.required"> {{ lan.please_enter}} {{ lan.email_id}} </div>
+                </div>
+      
+                <div *ngIf="model.permanent_email_id" class="invalid-feedback">
+                  <div *ngIf="!permanent_email_id.valid"> {{ lan.email_id}}  {{ lan.not_valid}}</div>
+                </div> -->
+              </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <br>
+    <!-- <div class="wrapper">
+      <button type="submit" class="btn continue">CONTINUE</button>
+    </div> -->
+    <div class="text-center">
+      <!-- <label class="btn text-primary" style="font-size: 14px; font-family: Roboto;"
+      (click)="reset()"
+      >Reset</label> <br> -->
+      <button type="button"  [ngClass]="['btn mr-3', continue, ft_md]" (click)="back()"> {{lan.back}} </button>
+      <button type="button"  [ngClass]="['btn mr-3', continue, ft_md]" (click)="cancel()"> {{ lan.cancel}} </button>
+      <button type="submit"  [ngClass]="['btn mr-3', continue, ft_md]"> {{ lan.save_continue }} </button>
+
+    </div>
+    <br>
+
+  </form>
+
+
+</div>
+
+<app-user-footer></app-user-footer>

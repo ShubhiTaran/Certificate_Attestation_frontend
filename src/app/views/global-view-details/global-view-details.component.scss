@@ -1,0 +1,148 @@
+.navbar{
+    font-size: 16px;
+    font-weight: 600;
+    color: #282828;
+    font-size: Roboto;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+  }
+  
+  .nav_no{
+    border-radius: 2px;
+    background-color: #f9f9f9;
+  }
+  
+  .back_Set{
+    // padding: 10px;
+    border-radius: 33.8px;
+    // background-color: #3068a8;
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    font-family: Roboto;
+    color: #ffffff;
+    cursor: pointer;
+    // display: inline;
+  }
+  
+  .select{
+    opacity: 1;
+  }
+  .deselect{
+    opacity: 0.29;
+  }
+  
+  .line{
+    width: 6%;
+    border-top: solid 3px #bfbfbf;
+    margin-top: 16px;
+  }
+  
+  // .detail{
+  //   font-family: ProximaNova;
+  //   font-size: 20px;
+  //   color: #3068a8;
+  // }
+  
+  .txt_font{
+    font-family: Roboto;
+    font-size: 16px;
+    color: #494949;
+  
+  }
+  
+  // .btn_size{
+  //     padding: 10px 70px;
+  //     background-color: #4990e2;
+  //     color: #ffffff;
+  //     font-family: Roboto;
+  //     font-weight: 500;
+  //     font-size: 16px;
+  // }
+  
+  .rowdata {
+    font-family: Roboto;
+    // font-size: 14px;
+    color: var(--greyish-brown);
+  }
+  
+  //   .table th {
+  //     padding: .75rem;
+  //     vertical-align: top;
+  //      border-top: 0px solid #dee2e6; 
+  // }
+  
+  .inputTxt{
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #494949;
+  cursor: pointer;
+  }
+  
+  .popUptxt{
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #494949;
+  }
+  
+  .table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 0px solid red; 
+  border-right: 1px solid #e6e8ed;
+  }
+  .table th{
+  border-top: 0px solid red; 
+  border-bottom: 0px solid red; 
+  }
+  
+  .redBorder{
+  border: solid 1px red;
+  }
+  
+  .setStatus{
+  margin: 0px;
+  font-family: Roboto;
+  font-size: 18px;
+  color: #d0021b;
+  cursor: pointer;
+  }
+  
+  
+  
+  .setImg{
+    margin-right: 10px;
+    margin-left: 10px;
+    font-family: ProximaNova;
+    font-size: 16px;
+    color: var(--black-two);
+    cursor: pointer;
+  }
+  
+  .viewDoc{
+    color: #4a90e2;
+    cursor: pointer;
+  }
+  
+  .setTxt{
+    padding-left: 6px;
+    padding-right: 10px;
+    font-family: Roboto;
+    margin: 0px;
+    cursor: pointer;
+  }
+  
+  .grayHead{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+     background-color: #ecf0f1;
+  }
+  
+  .point{
+    cursor: pointer;
+  }

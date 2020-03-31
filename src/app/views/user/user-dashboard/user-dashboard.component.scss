@@ -1,0 +1,111 @@
+   .wrapper {
+   text-align: center;
+   }
+   .button {
+   position: absolute;
+   top: 50%;
+   }
+.header {
+ overflow: hidden;
+
+ padding: 20px 10px;
+}
+
+.sethello{
+  font-size: 30px;
+}
+// tr , td {width:5%}
+html,
+
+
+.danger{
+  color: red;
+  cursor: pointer;
+}
+
+.header a {
+ float: left;
+ color: black;
+ text-align: left;
+ padding: 12px;
+ text-decoration: none;
+ font-size: 18px; 
+ line-height: 25px;
+ border-radius: 4px;
+}
+.green{
+  color: green
+}
+.header a.logo {
+ font-size: 25px;
+ font-weight: bold;
+}
+
+.fonts{
+  font-size:18px;
+}
+
+.header a.active {
+ background-color: dodgerblue;
+ color: white;
+}
+
+.header-right {
+ float: right;
+}
+.dodgerblue{
+ background-color: dodgerblue;
+}
+
+.tblHead{
+  font-weight: 500;
+}
+
+.schedule{
+  font-family: Roboto;
+  font-size: 13px;
+  text-align: center;
+  color: #4a90e2;
+  cursor: pointer;
+}
+
+.notAvailable{
+  font-family: Roboto;
+  font-size: 13px;
+  text-align: center;
+  color: var(--greyish-brown);
+}
+
+.tblHead{
+	font-family: Roboto;
+	// font-size: 14px;
+	font-weight: 500;
+  // color: #ffffff;
+  // background-color: #004b8f;
+}
+
+.tblBodyTxt{
+		font-family: Roboto;
+		font-size: 13px;
+		color: var(--black);
+}
+
+.viewColor{
+	color: #4a90e2;
+	cursor: pointer;
+}
+
+.grayHead{
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+   background-color: #ecf0f1;
+}
+
+.point{
+  cursor: pointer;
+}
+
+.table-striped td {border: none !important; border-right: solid 1px #ccc !important;}
+
+.table-striped th {border: none !important; border-right: solid 1px #ccc !important;}

@@ -1,0 +1,82 @@
+<div [ngClass]="[bg_color]">
+<app-font-set ></app-font-set>
+</div>
+
+<app-login-header></app-login-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div [ngClass]="['container-fluid px-5', bg_image]">
+   <div class="pt-5">
+
+      <div class="row">
+         <div class="col-md-8 d-flex align-items-center">
+            <p class="txt1"> {{lan.document_attestation_system}} </p>
+         </div>
+
+         <div class="col-md-4 rounded">
+               <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+               <div [ngClass]="[setBg, diff]" class="container rounded p-4 setBorder shadow setPos">
+                  <p  [ngClass]="['welcome', ft_xl]"> {{ lan.forgot_password }} </p>
+
+                  <div class="form-group">
+                           
+                        <input type="text" autocomplete="off"class="form-control bor" id="email_id" required
+                          [(ngModel)]="model.email_id" name="email_id" placeholder="Email Id"
+                          [ngClass]="{ 'is-invalid': f.submitted && email_id.invalid }" #email_id="ngModel"
+                          [email]="true">
+              
+                        <div *ngIf="f.submitted && email_id.invalid" class="invalid-feedback">
+                          <div *ngIf="email_id.errors.required"> {{ lan.not_valid}} </div>
+                        </div>
+              
+                        <div *ngIf="model.email_id" class="invalid-feedback">
+                          <div *ngIf="!email_id.valid">Please enter valid Email ID </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+                  <br>
+
+                  <br>
+                  <br> <br> <br>
+
+                  <br><br>
+                  <div class="d-flex">
+                     <button type="submit" [ngClass]="['btn btnset',ft_md, continue]" class="btn btnset" (click)="db()"> {{ lan.cancel }} </button> &nbsp;
+                     <button type="submit" [ngClass]="['btn btnset',ft_md, continue]" > {{ lan.submit }} </button>
+                  </div>
+
+               </div>
+
+
+            </form>
+         </div>
+      </div>
+
+
+   </div>
+</div>
+
+<br>
+<br>
+<br>
+<!-- <div class="container">
+   <div class="container">
+      <p class="about">{{lan.about}}  <strong> {{lan.mahait}} </strong></p>
+      <div [ngClass]="[ft_xl]">
+            <p class="contant"> {{lan.para1}} </p>
+            <p class="contant"> {{lan.para2}} </p>
+            <p class="contant"> {{lan.para3}} </p>
+      </div>
+   </div>
+</div> -->
+
+
+
+<app-login-footer></app-login-footer>

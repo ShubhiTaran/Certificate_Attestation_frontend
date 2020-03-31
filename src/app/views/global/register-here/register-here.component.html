@@ -1,0 +1,299 @@
+<app-font-set ></app-font-set>
+<ngx-ui-loader></ngx-ui-loader>
+<div [ngClass]="['container-fluid global-bor', bg_color]">
+   <div class="row">
+      <div class="col-md-1 d-flex justify-content-end align-items-center">
+         <img style="height: 50px; width: auto; cursor: pointer;" (click)="db()" src="assets/img/mlogo2.png" />
+      </div>
+      <div class="col-md-7 d-flex align-items-center">
+         <div class="txt-white">
+            <p [ngClass]="['m-0', ft_xl]" > {{ lan.document_attestation_system }} </p>
+            <div class="d-flex ft-sm">
+               <p [ngClass]="['m-0 point', ft_sm]" (click)="db()"> {{ lan.home }} </p>
+               <p [ngClass]="['m-0 pl-2', ft_sm]" >></p>
+               <p [ngClass]="['m-0 point pl-2', ft_sm]"> {{ lan.register }} </p>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-md-4 p-0">
+         <div class="d-flex align-items-center justify-content-end">
+            <div class="ml-4" style="background-color:white">
+               <img class="m-2" style="height: 50px; width: auto; cursor: pointer;" (click)="db()"
+                  src="assets/img/mahait-logo.png" />
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div [ngClass]="['container-fluid', diff]">
+   <br>
+   <div class="container">
+
+      <div class="row">
+         <div class="col-md-1"></div>
+         <div class="col-md-10">
+            <p [ngClass]="['m-0', ft_md]"> {{ lan.welcome_to_government_of_maharashtra_please_create_your_account}} </p>
+            <br>
+            <form [formGroup]="resetForm" nonvalidate>
+               <div class="row">
+
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}"> {{ lan.first_name }} <span style="color:red"> *</span></label>
+
+                        <input type="text" formControlName="first_name"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                            pattern="[a-zA-Z][a-zA-Z ]+"
+                           [class.is-invalid]='submitted && f.first_name.errors' required>
+                        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                           <div *ngIf="f.first_name.errors.required"> {{ lan.please_enter}}  {{ lan.first_name}} </div>
+                           <div *ngIf="resetForm.get('first_name').hasError('pattern')">  {{ lan.first_name}} {{ lan.not_valid}} </div>
+                        </div>
+
+                     </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.middle_name }} </label>
+                        <input type="text" formControlName="middle_name"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           >
+                     </div>
+                  </div>
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.last_name }} <span style="color:red"> *</span></label>
+                        <input type="text" formControlName="last_name"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                            pattern="[a-zA-Z][a-zA-Z ]+"
+                           [class.is-invalid]='submitted && f.last_name.errors' required>
+                        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                           <div *ngIf="f.last_name.errors.required">Field required</div>
+                           <div *ngIf="resetForm.get('last_name').hasError('pattern')">Name is required</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
+               <div class="row">
+
+                  <div class="col-sm-4">
+                     <div class="form-group">
+
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.date_of_birth }} <span style="color:red"> *</span></label>
+
+                        <div class="form-group input-group">
+                           <input type="text" formControlName="dob"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           [class.is-invalid]='submitted && (f.dob.errors || !ageStatus)'
+                          
+                              (ngModelChange)="ageChk(resetForm.value.dob)"
+                              bsDatepicker required>
+                              <div class="input-group-append">
+                                 <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+                             </div>
+
+                           <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                              <div *ngIf="f.dob.errors.required"> {{ lan.please_select}} {{ lan.date_of_birth}} </div>
+                           </div>
+                           <div *ngIf="submitted && !ageStatus" class="invalid-feedback">
+                                 <div> {{ lan.date_of_birth }} {{ lan.not_valid}} </div>
+                             </div>
+                        </div>
+
+                     </div>
+                  </div>
+                  <div class="col-sm-4">
+                     <div class="form-group">
+
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.nationality }} <span style="color:red"> *</span></label>
+                        <select formControlName="nationality"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           [class.is-invalid]='submitted && f.nationality.errors' 
+                           required>
+                           <option value=""></option>
+                           <option *ngFor="let countries of api">{{countries.name}}</option>
+                        </select>
+
+                        <div *ngIf="submitted && f.nationality.errors" class="invalid-feedback">
+                           <div *ngIf="f.nationality.errors.required"> {{ lan.please_select}} {{ lan.nationality}} </div>
+                        </div>
+
+                     </div>
+                  </div>
+                  <div class="col-sm-4">
+                     <div class="form-group">
+
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.sex }} <span style="color:red"> *</span></label>
+
+                        <select formControlName="gender"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           [class.is-invalid]='submitted && f.gender.errors'  required>
+                           <!-- <option value="">Select Gender...</option> -->
+                           <option>Male</option>
+                           <option>Female</option>
+                           <option>Other</option>
+
+                        </select>
+                        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                           <div *ngIf="f.gender.errors.required"> {{ lan.please_select }} {{ lan.gender }} </div>
+                        </div>
+                        <!-- </div> -->
+                     </div>
+
+                  </div>
+               </div>
+
+
+
+
+
+
+               <div class="row">
+
+                  <div class="col-md-4">
+                     <div class="form-group">
+
+
+                        <div id="emailDiv">
+                           <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.email_id}} <span style="color:red"> *</span></label>
+                           <input type="text" formControlName="email_id"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                               [class.is-invalid]='submitted && f.email_id.errors'>
+                           <div *ngIf="submitted && f.email_id.errors" class="invalid-feedback">
+                              <div *ngIf="f.email_id.errors.required"> {{ lan.please_enter}} {{ lan.email_id }} </div>
+                              <div *ngIf="f.email_id.errors.email"> {{ lan.email_id }} {{ lan.not_valid}} </div>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <div id="phoneDiv">
+                           <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.mobile_number }} <span style="color:red"> *</span></label>
+                           <input type="text" formControlName="contact" pattern="[0-9]+"  (keyup)="phone_number()"
+                           minlength="10" maxlength="10"
+                                [ngClass]="['form-control frm-inside-txt', ft_md]" 
+                              [class.is-invalid]='submitted && f.contact.errors'>
+                           <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                              <div *ngIf="f.contact.errors.required"> {{ lan.please_enter }} {{ lan.mobile_number}} </div>
+                              <div *ngIf="f.contact.errors.pattern"> {{ lan.mobile_number }} {{ lan.not_valid}} </div>
+                              <div *ngIf="f.contact.errors.pattern"> {{ lan.mobile_number }} {{ lan.not_valid}} </div>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.name_of_the_university_tbl }} <span style="color:red"> *</span></label>
+                        <select formControlName="university"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                        (change)="universityChange($event.target.value)"
+                           [class.is-invalid]='submitted && f.university.errors' 
+                           required>
+                           <option *ngFor="let university of universitys" value="{{university}}">{{university}}</option>
+
+                        </select>
+                        <div *ngIf="submitted && f.university.errors" class="invalid-feedback">
+                           <div *ngIf="f.university.errors.required"> {{ lan.please_select}} {{ lan.name_of_the_university_tbl}} </div>
+                        </div>
+                     </div>
+
+     
+
+                  </div>
+
+
+               </div>
+
+               <div class="row">
+                  <div class="col-sm-4">
+                     <div class="form-group">
+
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.password }} <span style="color:red"> *</span></label>
+                        <input type="password" formControlName="password" (keyup)="password_chk()" minlength="8" 
+                           pattern='((?=.*\d)(?=.*[&])(?=.*[a-z])(?=.*[A-Z]).{8,30})'   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           [class.is-invalid]='submitted && f.password.errors' 
+                           required>
+
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                           <div *ngIf="f.password.errors.required"> {{ lan.please_enter }} {{ lan.password}} </div>
+                           <div *ngIf="f.password.errors.pattern"> {{ lan.use_a_mix_of_letters }}  </div>
+                           <div *ngIf="f.password.errors.minlength"> Password should be greater then 8 character </div>
+                        </div>
+
+                        <!-- <span class="only-show-on-hover" style="color:red">* password should contain atleast one number,
+                           one
+                           uppercase letter , one
+                           lowercase letter and one special character i.e. (&quot; &#161;; &amp; &lt; &gt; &lowast;
+                           &minus;
+                           &sdot; &prime; &frasl;
+                           &tilde; &acute; &ndash; &circ;)
+                        </span> -->
+                        <!-- <div *ngIf="this.resetForm.value.password">
+                        <span *ngIf="!passwordStrenth" class="ft-sm" style="color:red">* {{ lan.use_a_mix_of_letters }}
+                        </span>
+                     </div> -->
+
+                     </div>
+
+                  </div>
+
+                  <div class="col-sm-4">
+                     <div class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.confirm_password }} <span style="color:red"> *</span></label>
+                        <input type="password" formControlName="confirm_password"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                           (keyup)="confirm_password()"
+                           [class.is-invalid]='submitted && (f.password.errors || !passwordMatch)' required
+                           >
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                           <div *ngIf="f.password.errors.required">Field required</div>
+                        </div>
+                        <div *ngIf="submitted && !passwordMatch" style="color: #f86c6b; font-size: 80%;">
+                           <div>Password did't matched</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                     <div [hidden]="!others"  class="form-group">
+                        <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > university Name <span style="color:red"> *</span></label>
+                        <input type="text" formControlName="others"   [ngClass]="['form-control frm-inside-txt', ft_md]"
+                            pattern="[a-zA-Z][a-zA-Z ]+"
+                           [class.is-invalid]='submitted && f.others.errors' required="{{others}}">
+                        <div *ngIf="submitted && f.others.errors" class="invalid-feedback">
+                           <div *ngIf="f.others.errors.required">Field required</div>
+                           <div *ngIf="resetForm.get('others').hasError('pattern')">Name is required</div>
+                        </div>
+                        <div [ngClass]="[ft_sm]">
+                          <b> Important:</b>Please note that any academic certificate issued by any Medical / Animal Husbandry / Agriculture /Fisheries university/ institute is NOT verified by this department.
+                        </div>
+                     </div>
+                  </div>
+
+
+               </div>
+
+               <div class="row">
+                  <div class="col-sm-4"></div>
+                  <!-- <div class="col-sm-4">
+                     <div class="g-recaptcha" data-sitekey="6LfxzKkUAAAAAMuYleFUNJhI0bp4ywL9S_tI8S4E"></div>
+                  </div> -->
+               </div>
+               <br>
+               <div class="text-center">
+                  <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="startpage()"> {{ lan.register }} </button>
+                  <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="db()"> {{ lan.back}} </button>
+                  <button type="button" [ngClass]="['btn', continue, ft_md]" (click)="db()"> {{ lan.cancel}} </button>
+               </div>
+            </form>
+
+         </div>
+      </div>
+
+   </div>
+</div>
+
+
+<app-login-footer></app-login-footer>
+   

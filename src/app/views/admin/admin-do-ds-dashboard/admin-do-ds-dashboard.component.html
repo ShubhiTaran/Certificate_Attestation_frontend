@@ -1,0 +1,72 @@
+<app-font-set ></app-font-set>
+<app-admin-header pgName="Officer"></app-admin-header>
+
+<div class="container-fluid p-0">
+
+  <div>
+    <div class="container-fluid bg-white">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-row py-3">
+          <div (click)="totalApplication()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[0]' [ngClass]="['mx-2 my-0', ft_md, setTxt]" > {{ lan.desk_officer}} </p>
+            <label [class.deselect]='txtDeslect[0]' [ngClass]="['back_Set d-flex align-items-center justify-content-center', bg_color, ft_md]" >
+              {{ totalApplications }} </label>
+          </div>
+          <div (click)="approved()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[1]' [ngClass]="['mx-2 my-0', ft_md, setTxt]"> {{ lan.deputy_secretary }} </p>
+            <label [class.deselect]='txtDeslect[1]' [ngClass]="['back_Set d-flex align-items-center justify-content-center', bg_color, ft_md]">
+              {{ approvedCount }} </label>
+          </div>
+        </div>
+
+        <!-- <div>
+          <select class="form-control ft-md"
+            (change)="changeUserType($event.target.value)">
+            <option value="officer" class="ft-md"> {{ lan.officer }} </option>
+            <option value="user" class="ft-md"> {{ lan.user }} </option>
+          </select>
+        </div> -->
+
+      </div>
+    </div>
+
+    <div class="container-fluid p-0">
+      <p *ngIf='!empty' [ngClass]="[ft_md]" class="noData"> {{ lan.no_data }} </p>
+      <div *ngIf='empty'>
+        <table class="table table-striped border text-center">
+          <thead>
+            <tr [ngClass]="['tblHead', ft_md, bg_color]">
+              <th> {{ lan.name }} </th>
+              <th> {{ lan.email_id }} </th>
+              <th> {{ lan.mobile_number }} </th>
+              <th> {{ lan.nationality }}  </th>
+              <th> Remove </th>
+              <!-- <th> View Detail </th> -->
+            </tr>
+          </thead>
+          <tbody class="body-white">
+            <tr [ngClass]="[ft_sm]" *ngFor="let detail of data | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <td> {{detail.first_name }} {{ detail.middle_name }} {{ detail.last_name }} </td>
+              <td > {{detail.email_id }} </td>
+              <td > {{detail.phone_number }} </td>
+              <td > {{detail.nationality }} </td>
+              <td class="viewDetail" (click)="removeUser(detail._id, detail.user_type)"> {{ lan.remove }} </td>
+              <!-- <td class="viewDetail"> View Detail </td> -->
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <div class="d-flex justify-content-end mr-3">
+          <ngb-pagination [collectionSize]="data.length" [pageSize]="10" [(page)]="page"
+            aria-label="Default pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+  </div>
+
+  <app-admin-footer></app-admin-footer>

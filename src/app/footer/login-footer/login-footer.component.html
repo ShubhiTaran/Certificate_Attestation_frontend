@@ -1,0 +1,21 @@
+<div [ngClass]="['container-fluid py-2 setfooter global-bor', ft_sm, bg_color]" >
+  <div class="d-flex justify-content-center mb-1">
+    <p  [routerLink]="['/dashboard']" class="navHome txt-white"> {{lan.home }} </p>
+    <span class="navHome  txt-white">|</span>
+   
+    <p [routerLink]="['/contact-us']" class="navHome txt-white "> {{lan.contact_us}} </p>
+    <span class="navHome  txt-white">|</span>
+    <p [routerLink]="['/faq']" class="navHome txt-white "> {{lan.faq}} </p>
+    <span class="navHome  txt-white">|</span>
+    <p [routerLink]="['/help-center']" class="navHome txt-white "> {{lan.help_center}} </p>
+  </div>
+  <p class="byContinue txt-white"> 
+      By continuing past this page, you agree to our 
+      <span class="ancher" (click)="routing('../terms-condition')"> Terms of Service </span> ,
+       and <span class="ancher" (click)="routing('../policies')"> Privacy Policy </span> . © 2019
+  </p>
+</div>
+
+
+
+

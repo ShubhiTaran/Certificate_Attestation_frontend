@@ -1,0 +1,371 @@
+<app-font-set></app-font-set>
+<app-user-head pgName="Application form"></app-user-head>
+<app-big-header [number]=5 [application_id]='application_id' [_id]='_id' [userName]="userName"></app-big-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div [ngClass]="['container', diff]">
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <!-- <h1> {{ f.form.valid }} </h1> -->
+            <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8 d-flex justify-content-between">
+                        <label [ngClass]="['radio-inline point', ft_md]">
+                              <input type="radio" name="employee" value="employee" (change)="toggle('employee')"
+                                    [checked]="employee"> {{ lan.employee_self_employed }} <br>
+                        </label>
+                        <label [ngClass]="['radio-inline point', ft_md]">
+                              <input type="radio" name="employee" value="student" (change)="toggle('student')"
+                                    [checked]="student">
+                              {{ lan.student }} <br>
+                        </label>
+                        <label [ngClass]="['radio-inline point', ft_md]">
+                              <input type="radio" name="employee" [checked]="un_employee" value="un_employee"
+                                    (change)="toggle('un_employee')">
+                              Un employee <br>
+                        </label>
+                  </div>
+
+            </div>
+
+            <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
+                        <div class="row" [hidden]="!employee">
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                {{ lan.name_of_the_organization }}
+                                                <span style="color: red"> *</span>
+                                          </label>
+                                          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="name_of_organization" [(ngModel)]="model.name_of_organization"
+                                                #name_of_organization="ngModel" autocomplete="off"
+                                                [class.is-invalid]='f.submitted && (name_of_organization.invalid && employee)'
+                                                required="{{employee}}" />
+
+                                          <div *ngIf="f.submitted && name_of_organization.invalid"
+                                                class="invalid-feedback">
+                                                <div *ngIf="name_of_organization.errors.required">
+                                                      {{ lan.please_enter }}
+                                                      {{ lan.name_of_the_organization}} </div>
+                                          </div>
+                                    </div>
+
+                                    <!-- <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                {{ lan.pancard }} <span style="color: red"> *</span>
+                                          </label>
+                                          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="pan_card_number" [(ngModel)]="model.pan_card_number"
+                                                #pan_card_number="ngModel" autocomplete="off"
+                                                [class.is-invalid]='f.submitted && (pan_card_number.invalid && employee)'
+                                                required="{{employee}}" />
+
+                                          <div *ngIf="f.submitted && pan_card_number.invalid" class="invalid-feedback">
+                                                <div *ngIf="pan_card_number.errors.required"> {{ lan.please_enter}}
+                                                      {{ lan.pancard }} </div>
+                                          </div>
+                                    </div> -->
+                              </div>
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                {{ lan.complete_address }} <span style="color: red"> *</span>
+                                          </label>
+                                          <textarea rows="3" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="organization_address" [(ngModel)]="model.organization_address"
+                                                #organization_address="ngModel" autocomplete="off"
+                                                [class.is-invalid]='f.submitted && (organization_address.invalid && employee)'
+                                                required="{{employee}}"></textarea>
+
+                                          <div *ngIf="f.submitted && organization_address.invalid"
+                                                class="invalid-feedback">
+                                                <div *ngIf="organization_address.errors.required"> {{ lan.please_enter}}
+                                                      {{ lan.complete_address}} </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+
+
+
+
+                        <div [hidden]="!student">
+                              <div class="row">
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                      ngbTooltip="{{ lan.tooltip}}">Course<span style="color: red">
+                                                            *</span>
+                                                </label>
+                                                <input type="text" required="{{student}}"
+                                                      [ngClass]="['form-control frm-inside-txt', ft_md]" name="course"
+                                                      [(ngModel)]="model.course" #course="ngModel" autocomplete="off"
+                                                      [class.is-invalid]='f.submitted &&  (course.invalid && student )' />
+
+                                                <div *ngIf="f.submitted && course.invalid" class="invalid-feedback">
+                                                      <div *ngIf="course.errors.required">Course is
+                                                            required</div>
+                                                </div>
+                                          </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                      ngbTooltip="{{ lan.tooltip}}">
+                                                      Institute address <span style="color: red"> *</span>
+                                                </label>
+                                                <textarea rows="3" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                      name="organization_address"
+                                                      [(ngModel)]="model.organization_address"
+                                                      #organization_address="ngModel" autocomplete="off"
+                                                      [class.is-invalid]='f.submitted && (organization_address.invalid && student)'
+                                                      required="{{student}}"></textarea>
+
+                                                <div *ngIf="f.submitted && organization_address.invalid"
+                                                      class="invalid-feedback">
+                                                      <div *ngIf="organization_address.errors.required">
+                                                            {{ lan.please_enter}}
+                                                            Institute address </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                              <div class="row">
+                                    <div class="col-md-6">
+
+                                          <div class="form-group">
+                                                <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                      ngbTooltip="{{ lan.tooltip}}">
+                                                      {{ lan.name_of_the_college}} <span style="color: red"> *</span>
+                                                </label>
+
+                                                <select [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                      name="name_of_college" [(ngModel)]="model.name_of_college"
+                                                      (change)="universityChange($event.target.value)"
+                                                      #name_of_college="ngModel"
+                                                      [class.is-invalid]='f.submitted && (name_of_college.invalid && student)'
+                                                      required="{{student}}">
+                                                      <option *ngFor="let university of universitys"
+                                                            value="{{university}}">{{university}}</option>
+
+                                                </select>
+
+                                                <!-- <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                            name="name_of_college" [(ngModel)]="model.name_of_college"
+                                                            #name_of_college="ngModel" autocomplete="off"
+                                                            [class.is-invalid]='f.submitted && (name_of_college.invalid && student)'
+                                                            required="{{student}}" /> -->
+
+                                                <div *ngIf="f.submitted && name_of_college.invalid"
+                                                      class="invalid-feedback">
+                                                      <div *ngIf="name_of_college.errors.required">
+                                                            {{ lan.please_enter }}
+                                                            {{ lan.name_of_the_college}} </div>
+                                                </div>
+                                          </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div [hidden]="!other" class="form-group">
+                                                <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                      ngbTooltip="{{ lan.tooltip}}">
+                                                      {{ lan.name_of_the_college}} <span style="color: red"> *</span>
+                                                </label>
+                                                <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                      name="Others" [(ngModel)]="model.Others" #Others="ngModel"
+                                                      autocomplete="off"
+                                                      [class.is-invalid]='f.submitted && (Others.invalid && student)'
+                                                      required="{{other}}" />
+
+                                                <div *ngIf="f.submitted && Others.invalid" class="invalid-feedback">
+                                                      <div *ngIf="Others.errors.required"> {{ lan.please_enter }}
+                                                            {{ lan.name_of_the_college}} </div>
+                                                </div>
+                                                <div [ngClass]="[ft_sm]">
+                                                      <b> Important:</b>Please note that any academic certificate issued by any Medical / Animal Husbandry / Agriculture institute is NOT verified by this department.
+                                                    </div>
+                                          </div>
+
+                                    </div>
+                              </div>
+                        </div>
+
+
+
+
+                        <div [hidden]="!un_employee" class="row">
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">Course<span style="color: red"> *</span>
+                                          </label>
+                                          <input type="text" required="{{un_employee}}"
+                                                [ngClass]="['form-control frm-inside-txt', ft_md]" name="course"
+                                                [(ngModel)]="model.course" #course="ngModel" autocomplete="off"
+                                                [class.is-invalid]='f.submitted &&  (course.invalid && un_employee )' />
+
+                                          <div *ngIf="f.submitted && course.invalid" class="invalid-feedback">
+                                                <div *ngIf="course.errors.required">Course is
+                                                      required</div>
+                                          </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                {{ lan.name_of_the_college}} <span style="color: red"> *</span>
+                                          </label>
+
+                                          <select [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="name_of_college" [(ngModel)]="model.name_of_college"
+                                                (change)="universityChange($event.target.value)"
+                                                #name_of_college="ngModel"
+                                                [class.is-invalid]='f.submitted && (name_of_college.invalid && student)'
+                                                required="{{student}}">
+                                                <option *ngFor="let university of universitys" value="{{university}}">
+                                                      {{university}}</option>
+
+                                          </select>
+
+                                          <!-- <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                      name="name_of_college" [(ngModel)]="model.name_of_college"
+                                                      #name_of_college="ngModel" autocomplete="off"
+                                                      [class.is-invalid]='f.submitted && (name_of_college.invalid && student)'
+                                                      required="{{student}}" /> -->
+
+                                          <div *ngIf="f.submitted && name_of_college.invalid" class="invalid-feedback">
+                                                <div *ngIf="name_of_college.errors.required"> {{ lan.please_enter }}
+                                                      {{ lan.name_of_the_college}} </div>
+                                          </div>
+                                    </div>
+
+
+
+                                    <div [hidden]="!other" class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                {{ lan.name_of_the_college}} <span style="color: red"> *</span>
+                                          </label>
+                                          <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="Others" [(ngModel)]="model.Others" #Others="ngModel"
+                                                autocomplete="off"
+                                                [class.is-invalid]='f.submitted && (Others.invalid && student)'
+                                                required="{{other}}" />
+
+                                          <div *ngIf="f.submitted && Others.invalid" class="invalid-feedback">
+                                                <div *ngIf="Others.errors.required"> {{ lan.please_enter }}
+                                                      {{ lan.name_of_the_college}} </div>
+                                          </div>
+                                          <div [ngClass]="[ft_sm]">
+                                                <b> Important:</b>Please note that any academic certificate issued by any Medical / Animal Husbandry / Agriculture institute is NOT verified by this department.
+                                              </div>
+                                    </div>
+
+
+
+                              </div>
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{lan.tooltip}}"> {{ lan.year }} <span style="color: red">
+                                                      *</span></label>
+                                          <select name="year_of_passing" [(ngModel)]="model.year_of_passing"
+                                                [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                #year_of_passing="ngModel" required="{{un_employee}}"
+                                                [class.is-invalid]='f.submitted && (college_address.invalid && un_employee)'>
+                                                <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+
+                                          </select>
+                                          <div *ngIf="f.submitted && year_of_passing.invalid" class="invalid-feedback">
+                                                <div *ngIf="year_of_passing.errors.required"> Please select year of
+                                                      passing </div>
+                                          </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                          <label [ngClass]="['frm-txt', ft_sm]" placement="top"
+                                                ngbTooltip="{{ lan.tooltip}}">
+                                                Institute address <span style="color: red"> *</span>
+                                          </label>
+                                          <textarea rows="3" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                                name="college_address" [(ngModel)]="model.college_address"
+                                                #college_address="ngModel" autocomplete="off"
+                                                [class.is-invalid]='f.submitted && (college_address.invalid && un_employee)'
+                                                required="{{un_employee}}"></textarea>
+
+                                          <div *ngIf="f.submitted && college_address.invalid" class="invalid-feedback">
+                                                <div *ngIf="college_address.errors.required"> {{ lan.please_enter}}
+                                                      Institute address </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+
+                        </div>
+                        <div>
+
+
+                        </div>
+
+                        <div>
+
+                        </div>
+
+
+
+                        <div>
+
+
+                        </div>
+
+
+                  </div>
+
+
+            </div>
+
+            <div class="text-center">
+                  <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.purpose }}
+                        <span style="color: red"> *</span> </label>
+            </div>
+            <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                        <div class="form-group">
+                              <textarea rows="3" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                                    name="purpose_for_authentication" [(ngModel)]="model.purpose_for_authentication"
+                                    #purpose_for_authentication="ngModel" autocomplete="off"
+                                    [class.is-invalid]='f.submitted && ( purpose_for_authentication.invalid && (employee || student || un_employee))'
+                                    required></textarea>
+
+                              <div *ngIf="f.submitted && purpose_for_authentication.invalid" class="invalid-feedback">
+                                    <div *ngIf="purpose_for_authentication.errors.required">
+                                          {{ lan.please_enter}} {{ lan.purpose }} </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div class="text-center">
+                  <!-- <label class="btn text-primary" style="font-size: 14px; font-family: Roboto;"
+                        (click)="reset()">Reset</label>  -->
+                  <br>
+                  <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="back()"> {{ lan.back }}
+                  </button>
+                  <button type="button" [ngClass]="['btn mr-3', continue, ft_md]" (click)="cancel()"> {{ lan.cancel }}
+                  </button>
+                  <button type="submit" [ngClass]="['btn', continue, ft_md]"> {{ lan.save_continue }} </button>
+            </div>
+
+            <br>
+      </form>
+
+</div>
+<app-user-footer></app-user-footer>

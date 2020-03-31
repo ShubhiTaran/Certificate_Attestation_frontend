@@ -1,0 +1,35 @@
+<div [ngClass]="['container-fluid px-5 py-2 global-bor', bg_color]" >
+  <div class="d-flex justify-content-between align-items-center">
+
+     <div class="d-flex align-items-center">
+        <img  [routerLink]="['/dashboard']" class="logo mr-4" src="assets/img/gomLogo1.png" alt="Maharashtra Shashan" />
+        <div [ngClass]="[ft_xl, setTxt]">
+           <p class="higher" > {{lan.higher_technical_education_department}} </p>
+           <p class="higher higher_bold"> {{lan.government_of_maharashtra}} </p>
+        </div>
+     </div>
+
+     <div>
+
+        <div class="d-flex align-items-center">
+           <div>
+              <div [ngClass]="['d-flex', ft_md, diff]">
+                 <p [routerLink]="['/dashboard']" class="navHome"> {{lan.home}} </p>
+                 <!-- <span class="navHome ">|</span>
+                 <p [routerLink]="['/site-map']" class="navHome"> {{lan.sitemap}} </p> -->
+                 <span class="navHome">|</span>
+                 <p [routerLink]="['/contact-us']" class="navHome"> {{lan.contact_us}} </p>
+                 <span class="navHome">|</span>
+                 <p [routerLink]="['/faq']" class="navHome"> {{lan.faq}} </p>
+                 <span class="navHome">|</span>
+                 <p [routerLink]="['/help-center']" class="navHome"> {{lan.help_center}} </p>
+              </div>
+              <!-- <div>
+                 <input type="text" class="form-control mt-1"  placeholder="Search" />
+              </div> -->
+           </div>
+           <img  [routerLink]="['/dashboard']" class="logo ml-4 bg-white" src="assets/img/mahait-logo.png" alt="mahait-logo" />
+        </div>
+     </div>
+  </div>
+</div>

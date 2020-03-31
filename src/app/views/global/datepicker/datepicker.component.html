@@ -1,0 +1,11 @@
+
+<form [formGroup]="myForm">
+  <div class="row">
+    <div class="col-xs-12 col-12 col-sm-6 col-md-4 form-group">
+      <input type="text" class="form-control mb-3" placeholder="Datepicker" bsDatepicker formControlName="date" />
+      <pre *ngIf="myForm.value.date" class="code-preview">{{myForm.value.date | date}}</pre>
+    </div>
+   
+  </div>
+</form>
+

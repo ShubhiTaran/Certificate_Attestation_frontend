@@ -1,0 +1,90 @@
+<app-font-set ></app-font-set>
+<app-user-head pgName="{{lan.schedule}}"></app-user-head>
+
+<div [ngClass]="[diff]" class="container-fluid p-0">
+  <div class="container">
+      <p [ngClass]="['choice py-2', ft_xl]" > {{ lan.choice_of_verification_slot }} </p>
+    <hr class="m-0">
+
+    <div class="row">
+      <div class="col-md-5">
+          <p [ngClass]="['applicant mt-3', ft_md]">{{ lan.the_applicant_can_select }}
+        </p>
+        <div [ngClass]="['d-flex justify-content-center align-items-center', ft_sm]">
+            <span class="box_enable"></span>
+            <p class="ml-2 mr-3 mb-0"> {{ lan.date_slot_available }} </p>
+            <span class="box_disable"></span>
+            <p class="ml-2 mb-0"> {{ lan.date_slot_unavailable }} </p>
+          </div>
+        <br>
+        <div class="text-center">
+          <ngb-datepicker #dp [(ngModel)]="model" class="shadow body-white" [minDate]="today"
+            [maxDate]="{year: 2048, month: 12, day: 31}" (click)="selectedDate()" [markDisabled]="isDisabled"
+            (navigate)="date = $event.next">
+          </ngb-datepicker>
+        </div>
+
+      </div>
+      <div class="col-md-7 d-flex justify-content-center align-items-center">
+          <div>
+              <div [ngClass]="['d-flex justify-content-center align-items-center', ft_sm]">
+                  <span class="box_enable"></span>
+                  <p class="ml-2 mr-3 mb-0"> {{ lan.time_slot_available }} </p>
+                  <span class="box_disable"></span>
+                  <p class="ml-2 mb-0"> {{ lan.time_slot_unavailable }} </p>
+                </div>
+        <br>
+
+        <div [ngClass]="[ft_sm, 'txt-black']">
+
+            <div class="d-flex justify-content-center">
+
+              <p [className]="setClass[1]" (click)="timeSelected(1)">2.00pm – 2.15pm</p>
+
+              <p [className]="setClass[2]" (click)="timeSelected(2)">2.15pm – 2.30pm</p>
+
+              <p [className]="setClass[3]" (click)="timeSelected(3)">2.30pm – 2.45pm</p>
+
+              <p [className]="setClass[4]" (click)="timeSelected(4)">2.45pm – 3.00pm</p>
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+
+              <p [className]="setClass[5]" (click)="timeSelected(5)">3.00pm – 3.15pm</p>
+
+              <p [className]="setClass[6]" (click)="timeSelected(6)">3.15pm – 3.30pm</p>
+
+              <p [className]="setClass[7]" (click)="timeSelected(7)">3.30pm – 3.45pm</p>
+
+              <p [className]="setClass[8]" (click)="timeSelected(8)">3.45pm – 4.00pm</p>
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+
+              <p [className]="setClass[9]" (click)="timeSelected(9)">4.00pm – 4.15pm</p>
+
+              <p [className]="setClass[10]" (click)="timeSelected(10)">4.15pm – 4.30pm</p>
+
+              <p [className]="setClass[11]" (click)="timeSelected(11)">4.30pm – 4.45pm</p>
+
+              <p [className]="setClass[12]" (click)="timeSelected(12)">4.45pm – 5.00pm</p>
+
+            </div>
+
+          </div>
+
+      
+        <div class="text-center mt-3">
+            <button type="button" [ngClass]="['mr-3 btn', continue, ft_md]" (click)="home()"> {{ lan.cancel}} </button>
+          <button type="button" [ngClass]="['btn', continue, ft_md]" (click)="onSubmit()"> {{ lan.submit}} </button>
+        </div>
+     
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-user-footer></app-user-footer>

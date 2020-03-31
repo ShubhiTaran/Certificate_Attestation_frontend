@@ -1,0 +1,93 @@
+<app-font-set (childEvent)="message=$event" (bg)="bg=$event" (language)="language=$event"></app-font-set>
+<app-admin-header [userName]="userName" pgName="{{ lan.dashboard }}"></app-admin-header>
+
+<div class="container-fluid p-0">
+
+  <div [ngClass]="[diff]">
+    <div class="container-fluid body-white">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-row py-3 ft-md">
+          <div (click)="totalApplication()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [ngClass]="['mx-2 my-0', setTxt, ft_md]" [class.txtDeselect]='setClass[0]'>{{ lan.total_applications}}</p>
+            <label [class.deselect]='txtDeslect[0]' 
+            [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">
+              {{ totalApplications }} </label>
+          </div>
+          <div (click)="approved()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[1]' [ngClass]="['mx-2 my-0', setTxt, ft_md]">{{ lan.approved }}</p>
+            <label [class.deselect]='txtDeslect[1]'
+            [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">
+              {{ approvedCount }} </label>
+          </div>
+          <div (click)="rejected()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[2]' [ngClass]="['mx-2 my-0', setTxt, ft_md]"> {{ lan.rejected }} </p>
+            <label [class.deselect]='txtDeslect[2]'
+            [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">
+              {{ rejectedCount }} </label>
+          </div>
+          <div (click)="pending()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[3]' [ngClass]="['mx-2 my-0', setTxt, ft_md]"> {{ lan.pending }} </p>
+            <label [class.deselect]='txtDeslect[3]'
+            [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">
+              {{ pendingCount }} </label>
+          </div>
+          <div (click)="correction()" class="topHead d-flex align-items-center justify-content-center mr-4">
+            <p [class.txtDeselect]='setClass[4]' [ngClass]="['mx-2 my-0', setTxt, ft_md]"> {{ lan.correction }} </p>
+            <label [class.deselect]='txtDeslect[4]'
+            [ngClass]="['back_Set d-flex align-items-center justify-content-center', ft_md, bg_color]">
+              {{ correctionCount }} </label>
+          </div>
+        </div>
+
+        <div>
+          <select class="form-control ft-md"  
+          (change)="changeUserType($event.target.value)" >
+            <option value="user" class="ft-md">User</option>
+            <option value="officer"  class="ft-md">Officer</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid p-0">
+      <p *ngIf='!empty' class="noData"> {{ lan.no_data }} </p>
+      <div *ngIf='empty'>
+        <table class="table table-striped text-center border">
+          <thead [ngClass]="['tblHead', ft_md, bg_color]" class="tblHead">
+            <tr>
+              <th> {{ lan.application_no }} </th>
+              <th> {{ lan.name_of_the_applicant }} </th>
+              <th> {{ lan.details_of_the_applicant }} </th>
+              <th> {{ lan.submited_date }} </th>
+              <th> {{ lan.primary_status }} </th>
+              <th> {{ lan.final_status}} </th>
+            </tr>
+          </thead>
+          <tbody [ngClass]="['body-white', ft_sm]">
+            <tr *ngFor="let detail of data | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <td> {{detail.application_no }} </td>
+              <td> {{detail.full_name }} </td>
+              <td class="viewDetail" (click)="viewDetails(detail.application_no, detail.primary_status)">
+                {{ lan.view_details }} </td>
+              <td class=""> {{detail.application_date | date: 'dd/MM/yyyy' }} </td>
+              <td class=""> {{detail.primary_status }} </td>
+              <td class=""> {{detail.final_status }} </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <div class="d-flex justify-content-end mr-3">
+          <ngb-pagination [collectionSize]="data.length" [pageSize]="10" [(page)]="page"
+            aria-label="Default pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+  </div>
+
+  <app-admin-footer></app-admin-footer>

@@ -1,0 +1,189 @@
+<app-font-set ></app-font-set>
+
+<div [ngClass]="['container-fluid global-bor', bg_color]">
+  <div class="row">
+    <div class="col-md-1 d-flex justify-content-end align-items-center">
+      <img style="height: 50px; width: auto; cursor: pointer;" (click)="db()" src="assets/img/mlogo2.png" />
+    </div>
+    <div class="col-md-7 d-flex align-items-center">
+      <div class="txt-white">
+        <p [ngClass]="['m-0', ft_xl]"> {{ lan.document_attestation_system }} </p>
+        <div class="d-flex ft-sm">
+          <p [ngClass]="['m-0 point', ft_sm]" (click)="db()"> {{ lan.home }} </p>
+          <p [ngClass]="['m-0 pl-2', ft_sm]">></p>
+          <p [ngClass]="['m-0 point pl-2', ft_sm]"> {{ lan.register }} </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 p-0">
+      <div class="d-flex align-items-center justify-content-end">
+        <div class="ml-4" style="background-color:white">
+          <img class="m-2" style="height: 50px; width: auto; cursor: pointer;" (click)="db()"
+            src="assets/img/mahait-logo.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="['container-fluid', diff]">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5 mt-3">
+      <p [ngClass]="[ft_xl]">{{ lan.verify_attested_certificates }}</p>
+      <div class="shadow p-3 text-center setbor">
+        <p [ngClass]="['m-0', ft_md]"> {{ lan.please_upload_an_academic_certificate_for_verification }} </p>
+
+        <div>
+          <div>
+
+              <div class="image-upload">
+                  <label for="my_file">
+                       <img type="image" src="assets/img/passport_img.png" style="width:90px; height: 90px; cursor: pointer;" />
+                  </label>
+                
+               <input type="file" name="passport_photo" id="my_file" accept="application/x-zip-compressed,image/*"
+               (change)="preview(file.files)"
+                (change)="onFileSelected($event)" #file class="form-control-file" aria-describedby="fileHelp">
+                </div>
+
+          </div>
+        </div>
+        <p [ngClass]="['m-0', ft_sm]" style="color:#c2b5a8;">
+          {{ lan.make_sure_your_document_id_clear_enough_in_the_image }} </p>
+      </div>
+
+      <br>
+
+
+
+
+      <div *ngIf="load" class="shadow p-3 setbor">
+
+        <div class="row">
+          <div class="col-md-1 col-sm-1">
+            <img style="height: 25px; width: auto;" src="assets/img/zip_logo.svg" />
+          </div>
+          <div class="col-md-3 col-sm-3 d-flex align-items-center" style="word-wrap: break-word;">
+            <p [ngClass]="['m-0', ft_sm]"> {{ imgName }} </p>
+          </div>
+
+          <div class="col-md-7 col-sm-7 d-flex align-items-center">
+            <div class="progress-bar setBar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+              style="width:100%">
+            </div>
+          </div>
+
+          <div class="col-md-1 col-sm-1 d-flex align-items-center justify-content-center">
+            <img style="height: 25px; width: auto;" src="assets/img/tick1.svg" />
+          </div>
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="d-flex align-items-center">
+        <button type="button" [ngClass]="['btn', ft_md, continue]" (click)="verify()">
+          {{ lan.verify_certificate }} </button>
+        <img *ngIf="animate[10]" class="mx-3" style="height: 40px; width: auto;"
+          src="assets/img/verified_tick.svg" />
+      </div>
+    </div>
+
+    <div class="col-md-5 d-flex align-items-center justify-content-center">
+      <div *ngIf="load" class="my-5">
+          <input type="image" *ngIf="format != 'pdf'" style="width: 100%; height: 275px;" [src]="imgURL">
+          <iframe *ngIf="format == 'pdf'" [src]="imgURL" style="width: auto; height:275px;"></iframe>
+
+        <!-- <input type="image" class="my-5" src="{{ imgURL }}" style="width:auto; height: 275px;"> -->
+      </div>
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div *ngIf="success">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <div [ngClass]="[ft_md]">
+          <p> <span *ngIf="animate[0]"> {{ lan.first }} </span> <span *ngIf="animate[1]"> [ {{lan.pass}} 1/4] </span>
+          </p>
+          <p> <span *ngIf="animate[2]"> {{ lan.secound }} </span> <span *ngIf="animate[3]"> [{{ lan.pass }} 2/4] </span>
+          </p>
+          <p> <span *ngIf="animate[4]"> {{ lan.third }} </span> <span *ngIf="animate[5]"> [{{ lan.pass }} 3/4] </span>
+          </p>
+          <p> <span *ngIf="animate[6]"> {{ lan.fourth }} </span> <span *ngIf="animate[7]"> [{{ lan.pass }} 4/4]</span>
+          </p>
+          <p class="m-0" *ngIf="animate[8]"> {{ lan.fifth }} </p>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div *ngIf="animate[9]" class="border">
+          <div [ngClass]="['d-flex justify-content-between align-items-center py-2 px-4', bg_color]">
+            <p [ngClass]="['m-0 text-white text-center', ft_md]"> {{ imgName }} is valid!
+            </p>
+            <img style="height: 25px; width: auto; padding:3px 1px; border-radius:50%; " class="bg-white"
+              src="assets/img/tick1.svg" />
+          </div>
+
+          <p [ngClass]="['my-2 mb-0 text-center', ft_md]"> {{ lan.document_attested_by }} </p>
+
+          <div class="mx-4 mb-4  border-left border-top">
+            <table class="table table-striped">
+              <tbody [ngClass]="['text-center', ft_sm]">
+                <tr>
+                  <td> {{ lan.officer_name }} </td>
+                  <td> {{ officer_name }} </td>
+                </tr>
+                <tr>
+                  <td> {{ lan.designation }} </td>
+                  <td> {{ designation }} </td>
+                </tr>
+                <tr class="border-bottom">
+                  <td> {{ lan.attested_on }} </td>
+                  <td> {{ attested_on | date:'dd/MM/yyyy' }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="fail">
+    <div class="d-flex justify-content-center">
+      <div [ngClass]="['d-flex w-50 justify-content-between align-items-center py-2 px-4', bg_color]">
+        <p [ngClass]="['m-0 text-white text-center', ft_md]"> {{ imgName }} {{ lan.not_valid}}
+        </p>
+        <img style="height: 25px; width: auto; padding:3px 1px; border-radius:50%; " class="bg-white"
+          src="assets/img/omg.svg" />
+      </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <p [ngClass]="['m-0 w-75 text-center', ft_md]"> {{ lan.make_sure}} <strong>{{ lan.document_attestation_system }}
+        </strong>
+        <span style="color: #4a90e2;">{{ lan.web_link}}</span> </p>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<app-app-footer></app-app-footer>

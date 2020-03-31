@@ -1,0 +1,38 @@
+.setfooter {
+    position: fixed;
+    // height: 68px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+.navHome{
+    // text-align: center;
+    margin-right: 10px;
+    cursor: pointer;
+  font-family: Roboto;
+  margin-bottom: 0px;
+}
+
+.byContinue{
+    opacity: 0.62;
+    text-align: center;
+    margin: 0px;
+}
+
+.bg-lightBlack{
+    background-color: #434a54;
+}
+
+.ancher{
+    color: white;
+    text-decoration: underline;
+    opacity: 0.62;
+}
+.ancher:hover{
+    text-decoration: underline;
+    color: white;
+    opacity: 1;
+    cursor: pointer;
+}

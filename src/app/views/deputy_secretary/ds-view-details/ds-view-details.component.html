@@ -1,0 +1,942 @@
+<app-font-set ></app-font-set>
+<ngx-ui-loader></ngx-ui-loader>
+<app-ds-header pgName="{{application_no}}- {{lan.view_details}}"></app-ds-header>
+
+<div class="container-fluid p-0">
+  <div [ngClass]="['container-fluid p-0', diff]">
+
+
+
+    <div class="container-fluid" style="background-color: #f5f5f5;">
+      <div class="container py-3 d-flex justify-content-between align-items-center">
+        <div (click)="selectShow(1)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[0], bg_color]" >1</label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]"> {{ lan.personal_details }} </p>
+        </div>
+        <div (click)="selectShow(2)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[1], bg_color]">2</label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]">{{ lan.passport_details }}</p>
+        </div>
+        <div (click)="selectShow(3)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[2], bg_color]">3</label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]">{{ lan.contact_details }}</p>
+        </div>
+        <div *ngIf="Gname" (click)="selectShow(4)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[3], bg_color]"> {{ foure }}  </label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]"> {{ lan.guarantor_details }} </p>
+        </div>
+        <div (click)="selectShow(5)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[4], bg_color]"> {{ five }} </label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]">{{ lan.current_designation}}</p>
+        </div>
+        <div (click)="selectShow(6)" class="d-flex flex-wrap align-items-center">
+          <label [ngClass]="[setClass[5], bg_color]" > {{ six }} </label>
+          <p [ngClass]="['setTxt', ft_md, setTxt]">{{ lan.upload_documents }}</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="m-0">
+
+    <div class=pt-3>
+
+      <div *ngIf="show[0]">
+
+
+        <!-- <ng-template #popTitle><b *ngIf="!setHide">Desk officer</b></ng-template>
+        <ng-template #popContent>
+          <div *ngIf="!setHide">
+            <input type="text" class="form-control popUptxt" #popText>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[0]'
+              (click)="popUpClose(PuserType, popText.value, 'userType', 0)">SUBMIT</button>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[1]'
+              (click)="popUpClose(full_name_remark, popText.value, 'full_name_remark', 1)">SUBMIT</button>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[2]'
+              (click)="popUpClose(sex_remark, popText.value, 'sex_remark', 2)">SUBMIT</button>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[3]'
+              (click)="popUpClose(date_of_birth_remark, popText.value, 'date_of_birth_remark', 3)">SUBMIT</button>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[4]'
+              (click)="popUpClose(father_name_remark, popText.value, 'father_name_remark', 4)">SUBMIT</button>
+            <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[5]'
+              (click)="popUpClose(mother_name_remark, popText.value, 'mother_name_remark', 5)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[43]'
+              (click)="popUpClose(nationality_remark, popText.value, 'nationality_remark', 43)">SUBMIT</button>
+          </div>
+        </ng-template> -->
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 d-flex">
+              <p  [ngClass]="[ft_md]" > {{ lan.personal_details }} </p>
+              <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                  <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                  <label class="m-0 p-0 point ft-md">Edit</label>
+                </div> -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+
+              <div class="form-group" [ngbPopover]="popContent" (click)="toggle(PuserType, 0)" #PuserType="ngbPopover"
+                [autoClose]="false" triggers="manual" placement="right" [popoverTitle]="popTitle">
+                <label [ngClass]="['frm-txt', ft_sm]" > {{ lan.user_type }} </label>
+                <input type="text" value="{{userType}}" disabled [class.redBorder]="classArr[0]"
+                 [ngClass]="['form-control frm-inside-txt', ft_md]">
+                <p [ngClass]="['error', ft_sm]"> {{ errorMsg.userType }} </p>
+              </div>
+
+              <div class="form-group" [ngbPopover]="popContent" (click)="toggle(full_name_remark, 1)"
+                #full_name_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                [popoverTitle]="popTitle">
+                <label [ngClass]="['frm-txt', ft_sm]">{{ lan.full_name }}</label>
+                <input type="text" value="{{name}}" [class.redBorder]="classArr[1]" disabled
+                 [ngClass]="['form-control frm-inside-txt', ft_md]">
+                <p [ngClass]="['error', ft_sm]"> {{ errorMsg.full_name_remark }} </p>
+              </div>
+
+              <div class="d-flex jsutify-content-between">
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(sex_remark, 2)"
+                  #sex_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.sex }} </label>
+                  <input type="text" value="{{sex}}" [class.redBorder]="classArr[2]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.sex_remark }} </p>
+                </div>
+                <div class="form-group ml-2" [ngbPopover]="popContent" (click)="toggle(date_of_birth_remark, 3)"
+                  #date_of_birth_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.date_of_birth }} </label>
+                  <input type="text" value="{{dateOfBirth  | date:'dd-MM-yyyy'}}" [class.redBorder]="classArr[3]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.date_of_birth_remark }} </p>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(nationality_remark, 42)"
+                #nationality_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                [popoverTitle]="popTitle">
+                <label [ngClass]="['frm-txt', ft_sm]">{{ lan.nationality }}</label>
+                <input type="text" value="{{nationality}}"  disabled
+                 [ngClass]="['form-control frm-inside-txt', ft_md]">
+                <p [ngClass]="['error', ft_sm]"> {{ errorMsg.nationality_remark }} </p>
+              </div>
+
+              <div class="form-group" [ngbPopover]="popContent" (click)="toggle(father_name_remark, 4)"
+                #father_name_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                [popoverTitle]="popTitle">
+                <label [ngClass]="['frm-txt', ft_sm]">{{ lan.fathers_name }}</label>
+                <input type="text" value="{{fathersName}}" [class.redBorder]="classArr[4]" disabled
+                 [ngClass]="['form-control frm-inside-txt', ft_md]">
+                <p [ngClass]="['error', ft_sm]"> {{ errorMsg.father_name_remark }} </p>
+              </div>
+              <div class="form-group" [ngbPopover]="popContent" (click)="toggle(mother_name_remark, 5)"
+                #mother_name_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                [popoverTitle]="popTitle">
+                <label [ngClass]="['frm-txt', ft_sm]">{{lan.mothers_name}}</label>
+                <input type="text" value="{{mothersName}}" [class.redBorder]="classArr[5]" disabled
+                 [ngClass]="['form-control frm-inside-txt', ft_md]">
+                <p [ngClass]="['error', ft_sm]"> {{ errorMsg.mother_name_remark }} </p>
+              </div>
+            </div>
+            <div class="col-md-2 mt-3">
+              <img style="height: 226px; width:180px;" src="{{ userImg }}" />
+            </div>
+
+
+          </div>
+        </div>
+        <!-- <div *ngIf="setHide" class="text-center">
+          <hr>
+          <button type="button" [ngClass]="['my-2 btn', continue, ft_md]" (click)="selectShow(2)">{{ lan.continue }}</button>
+          <hr>
+        </div> -->
+      </div>
+
+
+
+      <div *ngIf="show[1]">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                <div class="d-flex mb-2 justify-content-between align-items-center">
+                  <p [ngClass]="['m-0',  ft_md]">{{ lan.personal_details }}</p>
+  
+      
+                </div>
+                <table class="table table table-striped border text-center pb-5">
+                  <thead>
+  
+                    <tr [ngClass]="['txt-white',ft_md, bg_color]">
+                      <th>{{ lan.passport_no }}</th>
+                    <th>{{ lan.place_of_issue }}</th>
+                    <th>{{ lan.expiry_date }}</th>
+                    <th> {{ lan.view_document }} </th>
+                    <th>{{lan.remark}}</th>
+                    </tr>
+                  </thead>
+                  <tbody [ngClass]="[ft_sm, 'body-white']" *ngFor="let detail of passportDetail">
+                    <tr [className]="errorMsg.passport_photo_remark ? 'error' : 'rowdata'">
+                      <td > {{ detail.passport_number }}</td>
+                      <td >{{ detail.passport_issue_place }}</td>
+                      <td> {{ detail.passport_expire_date | date: 'dd/MM/yyyy' }} </td>
+                      <td class="viewDoc" (click)="popUpModel(detail.passport_photo, 'passport_photo_remark')"
+                        data-toggle="modal" data-target="#myModal">
+                      {{ lan.view_document }}</td>
+                      <td [ngClass]="['error', ft_sm]"> {{ errorMsg.passport_photo_remark }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+  
+          <!-- <div *ngIf="setHide" class="text-center">
+            <hr>
+            <button type="button" [ngClass]="['my-2 btn', continue, ft_md]" (click)="selectShow(3)">{{ lan.continue }}</button>
+            <hr>
+          </div> -->
+  
+        </div>
+
+
+
+      <div *ngIf="show[2]">
+        <div class="container">
+
+          <!-- <ng-template #popTitle><b *ngIf="!setHide">Desk officer</b></ng-template>
+          <ng-template #popContent>
+            <div *ngIf="!setHide">
+              <input type="text" class="form-control popUptxt" #popText>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[6]'
+                (click)="popUpClose(permanent_country_remark, popText.value, 'permanent_country_remark', 6)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[7]'
+                (click)="popUpClose(permanent_state_remark, popText.value, 'permanent_state_remark', 7)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[8]'
+                (click)="popUpClose(permanent_city_remark, popText.value, 'permanent_city_remark', 8)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[9]'
+                (click)="popUpClose(permanent_house_no_remark, popText.value, 'permanent_house_no_remark', 9)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[10]'
+                (click)="popUpClose(permanent_street_no_remark, popText.value, 'permanent_street_no_remark', 10)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[11]'
+                (click)="popUpClose(permanent_pincode_remark, popText.value, 'permanent_pincode_remark', 11)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[12]'
+                (click)="popUpClose(permanent_mobile_remark, popText.value, 'permanent_mobile_remark', 12)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[13]'
+                (click)="popUpClose(permanent_email_id_remark, popText.value, 'permanent_email_id_remark', 13)">SUBMIT</button>
+
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[14]'
+                (click)="popUpClose(present_country_remark, popText.value, 'present_country_remark', 14)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[15]'
+                (click)="popUpClose(present_state_remark, popText.value, 'present_state_remark', 15)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[16]'
+                (click)="popUpClose(present_city_remark, popText.value, 'present_city_remark', 16)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[17]'
+                (click)="popUpClose(present_house_no_remark, popText.value, 'present_house_no_remark', 17)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[18]'
+                (click)="popUpClose(present_street_no_remark, popText.value, 'present_street_no_remark', 18)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[19]'
+                (click)="popUpClose(present_pincode_remark, popText.value, 'present_pincode_remark', 19)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[20]'
+                (click)="popUpClose(present_mobile_remark, popText.value, 'present_mobile_remark', 20)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[21]'
+                (click)="popUpClose(present_email_id_remark, popText.value, 'present_email_id_remark', 21)">SUBMIT</button>
+            </div>
+          </ng-template> -->
+
+
+          <div class="row">
+            <div class="col-md-1"> </div>
+            <div class="col-md-5">
+              <div class="d-flex">
+                <p [ngClass]="[ ft_md]">{{ lan.permanent_address }}</p>
+                  <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                      <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                      <label class="m-0 p-0 point ft-md ">Edit</label>
+                    </div> -->
+              </div>
+          
+              <div class="row">
+                <div class="col-md-6">
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_house_no_remark, 9)"
+                    #permanent_house_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.house_number }} </label>
+                    <input type="text" value="{{permanentHouseNo}}" [class.redBorder]="classArr[9]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_house_no_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_country_remark, 6)"
+                    #permanent_country_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.country }}</label>
+                    <input type="text" value="{{ permanentCountry }}" [class.redBorder]="classArr[6]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_country_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_city_remark, 8)"
+                    #permanent_city_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.city }} </label>
+                    <input type="text" value=" {{permanentCity }} " [class.redBorder]="classArr[8]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_city_remark }} </p>
+                  </div>
+
+
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_street_no_remark, 10)"
+                    #permanent_street_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.street_number }} </label>
+                    <input type="text" value=" {{permanentStreetNo}}" [class.redBorder]="classArr[10]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_street_no_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_state_remark, 7)"
+                    #permanent_state_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.state }}</label>
+                    <input type="text" value=" {{ permanentState }}" [class.redBorder]="classArr[7]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_state_remark }} </p>
+                  </div>
+
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_pincode_remark, 11)"
+                    #permanent_pincode_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.pincode }} </label>
+                    <input type="text" value=" {{permanentPincode }}" [class.redBorder]="classArr[11]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_pincode_remark }} </p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_mobile_remark, 12)"
+                  #permanent_mobile_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]">{{ lan.mobile_number }} </label>
+                  <input type="text" value="{{permanentMobileNo}}" [class.redBorder]="classArr[12]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_mobile_remark }} </p>
+                </div>
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(permanent_email_id_remark, 13)"
+                  #permanent_email_id_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.email_id }}</label>
+                  <input type="text" value="{{permanentEmailId}}" [class.redBorder]="classArr[13]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.permanent_email_id_remark }} </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="d-flex">
+                <p [ngClass]="[ ft_md]"> {{ lan.present_address }} </p>
+                  <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                      <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                      <label class="m-0 p-0 point ft-md ">Edit</label>
+                    </div> -->
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_house_no_remark, 17)"
+                    #present_house_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.house_number }} </label>
+                    <input type="text" value="{{presentHouseNo}}" [class.redBorder]="classArr[17]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_house_no_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_country_remark, 14)"
+                    #present_country_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.country }}</label>
+                    <input type="text" value="{{presentCountry}}" [class.redBorder]="classArr[14]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_country_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_city_remark, 16)"
+                    #present_city_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.city}} </label>
+                    <input type="text" value="{{presentCity}}" [class.redBorder]="classArr[16]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_city_remark }} </p>
+                  </div>
+
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_street_no_remark, 18)"
+                    #present_street_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.street_number }} </label>
+                    <input type="text" value="{{presentStreetNo}}" [class.redBorder]="classArr[18]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_street_no_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_state_remark, 15)"
+                    #present_state_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.state }} </label>
+                    <input type="text" value="{{presentState}}" [class.redBorder]="classArr[15]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_state_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_pincode_remark, 19)"
+                    #present_pincode_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.pincode }} </label>
+                    <input type="text" value="{{presentPincode}}" [class.redBorder]="classArr[19]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_pincode_remark }} </p>
+                  </div>
+
+                </div>
+              </div>
+              <div>
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_mobile_remark, 20)"
+                  #present_mobile_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.mobile_number }} </label>
+                  <input type="text" value="{{presentMobileNo}}" [class.redBorder]="classArr[20]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_mobile_remark }} </p>
+                </div>
+                <div class="form-group" [ngbPopover]="popContent" (click)="toggle(present_email_id_remark, 21)"
+                  #present_email_id_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                  [popoverTitle]="popTitle">
+                  <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.email_id }}</label>
+                  <input type="text" value="{{presentEmailId}}" [class.redBorder]="classArr[21]" disabled
+                   [ngClass]="['form-control frm-inside-txt', ft_md]">
+                  <p [ngClass]="['error', ft_sm]"> {{ errorMsg.present_email_id_remark }} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- <div *ngIf="setHide" class="text-center">
+          <hr>
+          <button type="button" [ngClass]="['my-2 btn', continue, ft_md]" (click)="selectShow(4)">{{ lan.continue }}</button>
+          <hr>
+        </div> -->
+      </div>
+
+
+      <div *ngIf="show[3]">
+        <div class="container">
+
+          <!-- <ng-template #popTitle><b *ngIf="!setHide">Desk officer</b></ng-template>
+          <ng-template #popContent>
+            <div *ngIf="!setHide">
+              <input type="text" class="form-control popUptxt" #popText>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[22]'
+                (click)="popUpClose(guarantor_name_remark, popText.value, 'guarantor_name_remark', 22)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[23]'
+                (click)="popUpClose(guarantor_state_remark, popText.value, 'guarantor_state_remark', 23)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[24]'
+                (click)="popUpClose(guarantor_house_no_remark, popText.value, 'guarantor_house_no_remark', 24)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[25]'
+                (click)="popUpClose(guarantor_contact_remark, popText.value, 'guarantor_contact_remark', 25)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[26]'
+                (click)="popUpClose(guarantor_country_remark, popText.value, 'guarantor_country_remark', 26)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[27]'
+                (click)="popUpClose(guarantor_city_remark, popText.value, 'guarantor_city_remark', 27)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[28]'
+                (click)="popUpClose(guarantor_street_no_remark, popText.value, 'guarantor_street_no_remark', 28)">SUBMIT</button>
+              <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[29]'
+                (click)="popUpClose(guarantor_pincode_remark, popText.value, 'guarantor_pincode_remark', 29)">SUBMIT</button>
+            </div>
+          </ng-template> -->
+
+
+        
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <div class="d-flex">
+                <p [ngClass]="[ ft_md]"> {{ lan.guarantor_details }} </p>
+                  <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                      <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                      <label class="m-0 p-0 point ft-md ">Edit</label>
+                    </div> -->
+              </div>
+              
+              <div class="row">
+
+                <div class="col-md-4">
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_name_remark, 22)"
+                    #guarantor_name_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{lan.name}} </label>
+                    <input type="text" value="{{Gname}}" [class.redBorder]="classArr[22]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_name_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_country_remark, 26)"
+                    #guarantor_country_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{lan.country }}</label>
+                    <input type="text" value="{{Gcountry}}" [class.redBorder]="classArr[26]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_country_remark }} </p>
+                  </div>
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_pincode_remark, 29)"
+                    #guarantor_pincode_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.pincode }} </label>
+                    <input type="text" value="{{Gpincode}}" [class.redBorder]="classArr[29]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_pincode_remark }} </p>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_house_no_remark, 24)"
+                    #guarantor_house_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.house_number }} </label>
+                    <input type="text" value="{{GhouseNo}}" [class.redBorder]="classArr[24]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_house_no_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_street_no_remark, 28)"
+                    #guarantor_street_no_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.street_number }} </label>
+                    <input type="text" value="{{GstreetNo}}" [class.redBorder]="classArr[28]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_street_no_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_contact_remark, 25)"
+                    #guarantor_contact_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{ lan.mobile_number }} </label>
+                    <input type="text" value="{{GmobileNo}}" [class.redBorder]="classArr[25]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_contact_remark }} </p>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_state_remark, 23)"
+                    #guarantor_state_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]">{{ lan.state }}</label>
+                    <input type="text" value="{{Gstate}}" [class.redBorder]="classArr[23]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_state_remark }} </p>
+                  </div>
+
+                  <div class="form-group" [ngbPopover]="popContent" (click)="toggle(guarantor_city_remark, 27)"
+                    #guarantor_city_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                    [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm]"> {{lan.city}} </label>
+                    <input type="text" value="{{Gcity}}" [class.redBorder]="classArr[27]" disabled
+                     [ngClass]="['form-control frm-inside-txt', ft_md]">
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.guarantor_city_remark }} </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngIf="setHide" class="text-center">
+          <hr>
+          <button type="button" [ngClass]="['my-2 btn', continue, ft_md]" (click)="selectShow(5)">{{ lan.continue }}</button>
+          <hr>
+        </div> -->
+      </div>
+
+
+      <div *ngIf="show[4]">
+          <div class="container">
+  
+  
+            <div class="row">
+              <div class="col-md-2"> </div>
+              <div class="col-md-8">
+                <div *ngIf="designation == 'self-employee'">
+  
+  
+  
+                  <!-- <ng-template #popTitle><b *ngIf="!setHide">Desk officer</b></ng-template>
+                  <ng-template #popContent>
+                    <div *ngIf="!setHide">
+                      <input type="text" class="form-control popUptxt" #popText>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[30]'
+                        (click)="popUpClose(name_of_organization_remark, popText.value, 'name_of_organization_remark', 30)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[31]'
+                        (click)="popUpClose(organization_address_remark, popText.value, 'organization_address_remark', 31)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[32]'
+                        (click)="popUpClose(pan_card_number_remark, popText.value, 'pan_card_number_remark', 32)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[33]'
+                        (click)="popUpClose(purpose_for_authentication_remark, popText.value, 'purpose_for_authentication_remark', 33)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[34]'
+                        (click)="popUpClose(course_remark, popText.value, 'course_remark', 34)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[35]'
+                        (click)="popUpClose(name_of_college_remark, popText.value, 'name_of_college_remark', 35)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[36]'
+                        (click)="popUpClose(college_address_remark, popText.value, 'college_address_remark', 36)">SUBMIT</button>
+  
+                    </div>
+                  </ng-template> -->
+  
+  
+                  <div [ngClass]="[diff, ft_md]" class="d-flex">
+                    <p > {{ lan.employee_self_employed }} </p>
+                    <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                      <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                      <label class="m-0 p-0 point">Edit</label>
+                    </div> -->
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group" [ngbPopover]="popContent" (click)="toggle(name_of_organization_remark, 30)"
+                      #name_of_organization_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]"> {{ lan.name_of_the_organization }} </label>
+                      <input type="text" value="{{nameOfOrganization}}" [class.redBorder]="classArr[30]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]">
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.name_of_organization_remark }} </p>
+                    </div>
+    
+                    <!-- <div class="form-group" [ngbPopover]="popContent" (click)="toggle(pan_card_number_remark, 32)"
+                      #pan_card_number_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]">{{ lan.pancard }}</label>
+                      <input type="text" value="{{pancard}}" [class.redBorder]="classArr[32]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]">
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.pan_card_number_remark }} </p>
+                    </div> -->
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group" [ngbPopover]="popContent" (click)="toggle(organization_address_remark, 31)"
+                      #organization_address_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]">{{ lan.complete_address }}</label>
+                      <textarea type="text" value="{{organizationAddress}}" [class.redBorder]="classArr[31]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]"></textarea>
+    
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.organization_address_remark }} </p>
+                    </div>
+                    </div>
+                  </div>
+  
+                  <div class="form-group" [ngbPopover]="popContent"
+                    (click)="toggle(purpose_for_authentication_remark, 33)"
+                    #purpose_for_authentication_remark="ngbPopover" [autoClose]="false" triggers="manual"
+                    placement="right" [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm, diff]">{{ lan.purpose }}</label>
+                    <textarea type="text" value="{{purpose}}" [class.redBorder]="classArr[33]" disabled
+                      [ngClass]="['form-control frm-inside-txt', ft_md]"></textarea>
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.purpose_for_authentication_remark }} </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md-2"> </div>
+              <div class="col-md-8">
+                <div *ngIf="designation != 'self-employee'">
+  
+                  <ng-template #popTitle><b *ngIf="!setHide">Desk officer</b></ng-template>
+                  <ng-template #popContent>
+                    <div *ngIf="!setHide">
+                      <input type="text" class="form-control popUptxt" #popText>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[30]'
+                        (click)="popUpClose(name_of_organization_remark, popText.value, 'name_of_organization_remark', 30)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[31]'
+                        (click)="popUpClose(organization_address_remark, popText.value, 'organization_address_remark', 31)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[32]'
+                        (click)="popUpClose(pan_card_number_remark, popText.value, 'pan_card_number_remark', 32)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[33]'
+                        (click)="popUpClose(purpose_for_authentication_remark, popText.value, 'purpose_for_authentication_remark', 33)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[34]'
+                        (click)="popUpClose(course_remark, popText.value, 'course_remark', 34)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[35]'
+                        (click)="popUpClose(name_of_college_remark, popText.value, 'name_of_college_remark', 35)">SUBMIT</button>
+                      <button type="button" class="btn btn-danger btn-sm mt-2" *ngIf='personalDetails[36]'
+                        (click)="popUpClose(college_address_remark, popText.value, 'college_address_remark', 36)">SUBMIT</button>
+  
+                    </div>
+                  </ng-template>
+  
+  
+  
+  
+                  <div [ngClass]="[diff, ft_md]" class="d-flex">
+                    <p *ngIf="designation == 'student'"> Student </p>
+                    <p *ngIf="designation == 'unemployed'"> Un Employee </p>
+                    <!-- <div placement="top" ngbTooltip="{{toolTip}}">
+                      <img class="ml-4  mr-1 iconSetRounded" src="assets/img/pencil.png" />
+                      <label class="m-0 p-0 point">Edit</label>
+                    </div> -->
+                  </div>
+  
+  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group" [ngbPopover]="popContent" (click)="toggle(course_remark, 34)"
+                      #course_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]"> {{ lan.course }} </label>
+                      <input type="text" value="{{course}}" [class.redBorder]="classArr[34]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]">
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.course_remark }} </p>
+                    </div>
+                    <div class="form-group" [ngbPopover]="popContent" (click)="toggle(name_of_college_remark, 35)"
+                      #name_of_college_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]"> {{ lan.name_of_the_college }} </label>
+                      <input type="text" value="{{nameOfCollage}}" [class.redBorder]="classArr[35]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]">
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.name_of_college_remark }} </p>
+                    </div>
+                    </div>
+  
+                    <div class="col-md-6">
+  
+                        <div  *ngIf="designation == 'unemployed'" class="form-group" [ngbPopover]="popContent" (click)="toggle(name_of_college_remark, 35)"
+                        #name_of_college_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                        [popoverTitle]="popTitle">
+                        <label [ngClass]="['frm-txt', ft_sm, diff]"> Year of passing </label>
+                        <input type="text" value="{{year_of_passing | date:'dd-MM-yyyy'}}" [class.redBorder]="classArr[35]" disabled
+                          [ngClass]="['form-control frm-inside-txt', ft_md]">
+                        <p [ngClass]="['error', ft_sm]"> {{ errorMsg.year_of_passing_remark }} </p>
+                      </div>
+  
+                      <div class="form-group" [ngbPopover]="popContent" (click)="toggle(college_address_remark, 36)"
+                      #college_address_remark="ngbPopover" [autoClose]="false" triggers="manual" placement="right"
+                      [popoverTitle]="popTitle">
+                      <label [ngClass]="['frm-txt', ft_sm, diff]"> Institute address </label>
+                      <textarea type="text" value="{{collageAddress}}" [class.redBorder]="classArr[36]" disabled
+                        [ngClass]="['form-control frm-inside-txt', ft_md]"></textarea>
+                      <p [ngClass]="['error', ft_sm]"> {{ errorMsg.college_address_remark }} </p>
+                    </div>
+                    </div>
+                  </div> 
+             
+                  <div class="form-group" [ngbPopover]="popContent"
+                    (click)="toggle(purpose_for_authentication_remark, 33)"
+                    #purpose_for_authentication_remark="ngbPopover" [autoClose]="false" triggers="manual"
+                    placement="right" [popoverTitle]="popTitle">
+                    <label [ngClass]="['frm-txt', ft_sm, diff]">{{ lan.purpose }}</label>
+                    <textarea type="text" value="{{purpose}}" [class.redBorder]="classArr[33]" disabled
+                      [ngClass]="['form-control frm-inside-txt', ft_md]"></textarea>
+                    <p [ngClass]="['error', ft_sm]"> {{ errorMsg.purpose_for_authentication_remark }} </p>
+                  </div>
+                </div>
+              </div>
+  
+  </div>
+          
+          </div>
+          <!-- <div *ngIf="setHide" class="text-center">
+            <hr>
+            <button type="button" [ngClass]="['my-2 btn', continue, ft_md]"
+              (click)="selectShow(6)">{{ lan.continue }}</button>
+  
+            <hr>
+          </div> -->
+        </div>
+
+      <div *ngIf="show[5]">
+          <div class="container">
+  
+            <div class="d-flex mb-2 justify-content-between align-items-center">
+              <p [ngClass]="['m-0', ft_md]">{{ lan.upload_documents }}</p>
+            </div>
+  
+            <table class="table table-striped border text-center pb-5">
+              <thead >
+                <tr [ngClass]="['txt-white', ft_md, bg_color]">
+                  <th>{{ lan.certificate_number }}</th>
+                  <!-- <th>Examination</th> -->
+                  <th>{{ lan.name_of_the_university_tbl }}</th>
+                  <th>{{lan.year}}</th>
+                  <th>{{ lan.view_document }}</th>
+                  <th>{{ lan.remark }}</th>
+                </tr>
+              </thead>
+              <tbody class="body-white">
+                <tr  [ngClass]="[ft_sm]" *ngFor="let detail of uplodedDocuments; let i = index">
+  
+                  <td [className]="detail.attestation_docs_remark ? 'error' : 'rowdata'">
+                    {{detail.certificate_no }} </td>
+                  <!-- <td class="rowdata"> </td> -->
+                  <td [className]="detail.attestation_docs_remark ? 'error' : 'rowdata'">
+                    {{detail.name_of_institute }} </td>
+                  <td [className]="detail.attestation_docs_remark ? 'error' : 'rowdata'">
+                    {{detail.certificate_upload_date | date: 'dd/MM/yyyy' }} </td>
+                  <td style="color: #4a90e2; cursor: pointer;" (click)="popUpModel(detail.certificate_photo, i)"
+                    data-toggle="modal" data-target="#myModal">{{ lan.view_document}}</td>
+                  <td [ngClass]="['error', ft_sm]"> {{ detail.attestation_docs_remark }} </td>
+                </tr>
+              </tbody>
+            </table>
+  
+  
+            <div class="d-flex mb-2 justify-content-between align-items-center">
+              <p [ngClass]="['m-0',  ft_md]" > {{ lan.mandatory_document }} </p>
+              <!-- <input type="text" class="form-control w-25" [(ngModel)]="errorMsg.visa_photo_remark" /> -->
+            </div>
+  
+            <table class="table text-center pb-5" style="border: 1px solid #e6e8ed; background-color: #ffffff;">
+              <thead class="table table-striped border text-center pb-5">
+                <tr [ngClass]="['txt-white', ft_md, bg_color]">
+                  <th *ngIf="callletter_photo"> {{ lan.call_letter}} </th>
+                  <th *ngIf="affidavit_photo"> {{ lan.affidavit }} </th>
+                  <th *ngIf="visa_photo"> {{ lan.visa }} </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [ngClass]="[ft_sm]">
+                  <td  *ngIf="callletter_photo">
+                    <p class="rowdata viewDoc" style="color: #4a90e2; cursor: pointer;" (click)="popUpModel(callletter_photo, 'callletter_photo_remark')"
+                    data-toggle="modal" data-target="#myModal"> {{ lan.view_document}} </p>
+                    <p class="m-0 error"> {{ errorMsg.callletter_photo_remark }}</p>
+                     </td>
+                  <td *ngIf="affidavit_photo">
+                    <p class="rowdata viewDoc" style="color: #4a90e2; cursor: pointer;" (click)="popUpModel(affidavit_photo, 'affidavit_photo_remark')"
+                    data-toggle="modal" data-target="#myModal"> {{ lan.view_document}}</p>
+                    <p class="m-0 error">{{errorMsg.affidavit_photo_remark }} </p>
+                    </td>
+                  <td *ngIf="visa_photo">
+                    <p class="rowdata viewDoc" style="color: #4a90e2; cursor: pointer;" (click)="popUpModel(visa_photo, 'visa_photo_remark')"
+                    data-toggle="modal" data-target="#myModal">{{ lan.view_document}}</p>
+                    <p class="m-0 error"> {{errorMsg.visa_photo_remark }}</p>
+                    </td>
+                </tr>
+               
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="setHide" class="text-center">
+        <hr>
+        <button type="button" [ngClass]="['my-2 mr-3 btn', continue, ft_md]"
+        (click)="home()">{{ lan.cancel }}</button>
+        <button *ngIf="pageNumber != 7" type="button" [ngClass]="['my-2 btn', continue, ft_md]"
+        (click)="selectShow(pageNumber)">{{ lan.continue }}</button>
+        <hr>
+      </div>
+
+
+
+    <br>
+    <div *ngIf="!setHide" class="container">
+      <div [ngClass]="['text-center', ft_md]">
+        <label class="radio-inline mr-3 btn" [ngClass]="[diff]" (click)="status('Approved')">
+          <input type="radio" name="employee" value="employee"> {{ lan.approved}}<br>
+        </label>
+        <label class="radio-inline mr-3 btn" [ngClass]="[diff]" (click)="status('Rejected')">
+          <input type="radio" name="employee" value="employee"> {{ lan.rejected }} <br>
+        </label>
+        <label class="radio-inline mr-3 btn" [ngClass]="[diff]" (click)="status('Correction')">
+          <input type="radio" name="employee" value="employee"> {{lan.correction}} <br>
+        </label>
+      </div>
+
+
+      <div class="text-center">
+        <div class="d-flex justify-content-center align-items-center">
+          <label [ngClass]="['setStatus pt-2', ft_md]">{{ ApproveStatus }} </label>
+          <!-- <div ngbDropdown placement="bottom-center" class="d-inline-block">
+            <label class="setStatus" id="dropdownBasic1" ngbDropdownToggle> Status : {{ ApproveStatus }} </label>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="status('Approved')">Approved</button>
+            <button ngbDropdownItem (click)="status('Rejected')">Reject</button>
+          </div> 
+        </div> -->
+          <div class="ml-3">
+            <input type="text" *ngIf='ApproveStatus' placeholder="Reason"[ngClass]="['form-control frm-inside-txt', ft_md]"
+              [(ngModel)]="primary_reason">
+          </div>
+        </div>
+
+        <div class="text-center">
+            <button  type="button" [ngClass]="['my-2 mr-3 btn', continue, ft_md]"
+        (click)="home()">{{ lan.cancel }}</button>
+          <button *ngIf="pageNumber != 7" type="button" [ngClass]="['my-2 mr-3 btn', continue, ft_md]"
+            (click)="selectShow(pageNumber)">{{ lan.continue }}</button>
+          <button type="button" [ngClass]="['my-2 btn', continue, ft_md]" (click)="submit()"> {{lan.submit}} </button>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="container">
+      <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+  
+  
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="d-flex justify-content-between mb-2">
+                <h6 class="modal-title"></h6>
+  
+                <div class="d-flex">
+                  <input *ngIf="!setHide" type="text" class="form-control" [disabled]="setHide" placeholder="Remark"
+                    [ngClass]="{ 'is-invalid': errorMsg.doc_remark }" [(ngModel)]="errorMsg.doc_remark" />
+                  <button type="button" *ngIf="!setHide" class="btn mr-2 btn-link" data-dismiss="modal" (click)="putRemark()"> {{ lan.submit}} </button>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+  
+              </div>
+              <div>
+  
+                <input type="image" *ngIf="format != 'pdf'" style="width: 100%; height: auto;" [src]="popUpImg">
+                <iframe *ngIf="format == 'pdf'" [src]="popUpImg" style="width: 100%; height:70vh;"></iframe>
+  
+              </div>
+            </div>
+  
+  
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+
+    <app-ds-footer></app-ds-footer>

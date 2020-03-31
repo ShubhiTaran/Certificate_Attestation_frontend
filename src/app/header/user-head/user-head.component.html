@@ -1,0 +1,219 @@
+<div [ngClass]="['container-fluid global-bor', bg_color]">
+
+  <div class="row">
+    <div class="col-md-1 d-flex justify-content-end align-items-center">
+      <img style="height: 50px; width: auto; cursor: pointer;" (click)="navigate('../user-dashboard')"
+        src="assets/img/mlogo2.png" />
+    </div>
+
+    <div class="col-md-7 d-flex align-items-center">
+      <div class="txt-white">
+        <p [ngClass]="['m-0', ft_xl]" style="font-weight: bold;">{{ lan.document_attestation_system }}</p>
+        <div [ngClass]="['d-flex', ft_sm]">
+          <p class="m-0 point" (click)="navigate('../user-dashboard')"> {{ lan.home }} </p>
+          <p class="m-0 pl-2 ">></p>
+          <p class="m-0 pl-2 point">{{pgName}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 p-0">
+
+      <div class="d-flex align-items-center justify-content-end">
+        <div *ngIf="!addAppHide">
+          <div data-toggle="modal" data-target="#myModal_add">
+            <img class="mr-2 iconSetRounded" src="assets/img/plus1.png" />
+            <label [ngClass]="['m-0 p-0 point txt-white', ft_md]"> {{ lan.new_application }} </label>
+          </div>
+        </div>
+
+        <div ngbDropdown placement="bottom-right" class="d-inline-block ml-4">
+          <label class="name ft-md" id="dropdownBasic1" [ngClass]="['txt-white', ft_md]" ngbDropdownToggle>
+            {{ userName }} </label>
+          <div class="setBorder" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+            <div (click)="navigate('../user-profile')" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/user.png" />
+              <label class="m-0 p-0">{{ lan.profile }}</label>
+            </div>
+
+            <div (click)="navigate('../user-mandatory-documents')" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/groupp.png" />
+              <label class="m-0 p-0"> Mandatory Documemnts </label>
+            </div>
+
+            <div (click)="navigate('../download-doc')" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/groupp.png" />
+              <label class="m-0 p-0"> Download Documents </label>
+            </div>
+
+            <div (click)="navigate('../user-password-update')" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/groupp.png" />
+              <label class="m-0 p-0"> Change Password </label>
+            </div>
+
+            <div routerLink="/dashboard" ngbDropdownItem>
+              <img class="mr-2 iconSet" src="assets/img/logout.png" />
+              <label class="m-0 p-0"> Logout </label>
+            </div>
+          </div>
+        </div>
+        <div class="ml-4" style="background-color:white">
+          <img class="m-2" style="height: 50px; width: auto; cursor: pointer;" (click)="navigate('../user-dashboard')"
+            src="assets/img/mahait-logo.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="container">
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal_add">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="d-flex justify-content-between">
+            <h6 class="modal-title"></h6>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div>
+            <div [ngClass]="['container', diff]">
+              <p [ngClass]="['top_head', ft_xl]"> Steps before online application for attestation for Indian National:
+              </p>
+            
+              <div [ngClass]="['child', ft_sm]">
+                <div class="ml-4">
+                  <p [ngClass]="['parent m-0', ft_md]">1. Attestation by respective Board / University:</p>
+                  <div class="ml-4">
+                    <p class="m-0">* Limited to Boards/ Universities only in the State of Maharashtra</p>
+                    <p class="m-0">Board Certificates </p>
+                    <p class="m-0">- SSC Board Certificate </p>
+                    <p class="m-0">- HSC Board Certificate </p>
+                    <p class="m-0">Attestation should be obtained from Board officials only. Attestations by
+                      school/college principals, Head of
+                      Departments are not acceptable. </p>
+                    <p>University certificates attestation by Controller of Examination, Deputy Registrar/ Assistant
+                      Registrar of Exam
+                      Section of concerned university. </p>
+                  </div>
+                  <p [ngClass]="['parent m-0', ft_md]">2.Attestation by a Notary:</p>
+                  <p class="ml-4 mb-0">The Certificates are to be attested by a Notary on Rs. 25 stamp paper. </p>
+                  <p class="ml-4 mb-0" style="color: green;">After completion of Step 1 and 2 the applicant can Upload Certificate in portal with/ without attestation of Home Department (9th floor, New Administrative Building, Opp. Mantralaya) </p>
+                  <p class="ml-4 mb-0" style="color: red;">But Applicant has to ensure that the Certificated is duly attested from Home Department, before Applicant visits Higher & Technical Educational Department for Final Authentication on appointed date and time.
+            
+                    Document without attestation of Home Department will not be authenticated. For any queries or assistance please call 022-22855766 (From 10 am to 5 pm, mon-fri </p>
+                  <p [ngClass]="['parent m-0', ft_md]">3. Attestation by Home Department (Government of Maharashtra):
+                  </p>
+                  <p class="ml-4">The certificates are to be attested in Home Department (9th floor, New Administrative
+                    Building, Opp.
+                    Mantralaya) </p>
+            
+            
+                  <p [ngClass]="['parent m-0', ft_md]">Mandatory Support Documents:</p>
+                  <ul>
+                    <li>Students original passport</li>
+                    <li>Photocopy of student’s passport</li>
+                    <li> <b>Offer letter </b> from the Foreign University where admission is acquired.</li>
+                    <li>If the candidate is unable to come personally, the person visiting on behalf of the student
+                      should bring <b> authority </b> letter on Rs.100 stamp paper *.</li>
+            
+            
+                    <ul style="color: red;">
+                      <li>In such case photo identity proof of the authorized person (e.g. Passport, Aadhar card, PAN
+                        card) should also be submitted, and original should also be brought for verification. </li>
+                      <li>Dully signed Passport size photographs of both the student and the authorized person should be affixed on
+                        the authority letter (if process carried out by the authorized person on behalf of the
+                        applicant).</li>
+                      <li>If the candidate is currently studying abroad, photo copy of VISA should also be submitted.
+                      </li>
+                      <li>A person can be authorized to get attestation for only one student.</li>
+                    </ul>
+            
+            
+                  </ul>
+                </div>
+            
+            
+                <div>
+                  <p [ngClass]="['top_head', ft_xl]">Steps before Submission of application for attestation for Foreign
+                    National:</p>
+                  <div class="ml-4">
+                    <p [ngClass]="['parent m-0', ft_md]">1. Attestation by respective Board / University:</p>
+                    <p>(Limited to Universities only in the State of Maharashtra)
+                      University certificates attestation by Controller of Examination, Deputy Registrar/ Assistant
+                      Registrar of Exam Section of concerned university.</p>
+            
+            
+                    <p [ngClass]="['parent m-0', ft_md]">2.Attestation by a Notary:</p>
+                    <div class="ml-4">
+                    <p class="m-0">The Certificates are to be attested by a Notary on Rs. 25 stamp paper. </p>
+                    <p class="m-0" style="color: green;">After completion of Step 1 and 2 the applicant can Upload Certificate in portal with/ without attestation of Home Department (9th floor, New Administrative Building, Opp. Mantralaya)</p>
+                    <p class="m-0" style="color: red;">But Applicant has to ensure that the Certificated is duly attested from Home Department, before Applicant visits Higher & Technical Educational Department for Final Authentication on appointed date and time.</p>
+                    <p class="m-0" style="color: red;">Document without attestation of Home Department will not be authenticated. For any queries or assistance please call 022-22855766 (From 10 am to 5 pm, mon-fri)</p>
+                  </div>
+                    <p [ngClass]="['parent m-0', ft_md]">3. Attestation by Home Department (Government of Maharashtra):
+                    </p>
+                    <p class="ml-4">The certificates are to be attested in Home Department (9th floor, New
+                      Administrative Building, Opp. Mantralaya) </p>
+            
+                    <p [ngClass]="['parent m-0', ft_md]">Mandatory Support Documents:</p>
+                    <ul>
+                      <li>Students original <b> passport </b></li>
+                      <li>Photocopy of student’s passport</li>
+                      <li> If the validity of the old Passport has expired (delayed application for attestation), photo
+                        copy of the old Passport and Stay VISA which was valid for the duration of the academic course
+                        should be submitted.</li>
+                      <li>Original document of Stay VISA / Stay VISA extension</li>
+                      <li>Photocopy of Stay VISA / Stay VISA extension</li>
+            
+                      <ul style="color: red;">
+                        <li>If the candidate is unable to come personally, the person visiting on behalf of the student
+                          should bring authority letter on Rs.100 stamp paper dully stamped by concerned embassy in Maharashtra.</li>
+                        <li>The authority letter should be sent back to the student for signature. The receipts of these
+                          postal/ courier transactions should be preserved and submitted along with other documents.
+                        </li>
+                        <li>In such case photo identity proof of the authorized person (e.g. Passport, Aadhar card, PAN
+                          card) should also be submitted and original should also be brought for verification. </li>
+                        <li>Dully signed Passport size photographs of both the student and the authorized person should be affixed on
+                          the authority letter (if process carried out by the authorized person on behalf of the
+                          applicant).</li>
+                        <li>A person can be authorized to get attestation for only one student.</li>
+                      </ul>
+            
+            
+                    </ul>
+                  </div>
+                </div>
+            
+            
+              </div>
+            </div>
+            
+            <div class="container-fluid p-0">
+              <div class="text-center">
+                <hr>
+                <button type="button" data-dismiss="modal" [ngClass]="['my-2 mr-3 btn', continue, ft_md]" > Disagree and
+                  Cancel </button>
+                <button type="button" data-dismiss="modal" [ngClass]="['my-2 btn', continue, ft_md]"
+                (click)="addApplication()">Agree and Continue</button>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

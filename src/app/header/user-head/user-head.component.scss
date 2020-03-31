@@ -1,0 +1,73 @@
+.name{
+    font-family: Roboto;
+    // font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.top_head{
+    font-family: Roboto;
+    // font-size: 20px;
+    color: #3068a8;
+    font-weight: 600;
+}
+// sm
+.child{
+    font-family: Roboto;
+    // font-size: 16px;
+    // color: #494949;
+}
+
+// md
+.parent{
+    font-family: Roboto;
+    // font-size: 18px;
+    font-weight: 600;
+    // color: #494949;
+}
+
+.setBorder{
+    border-bottom: solid 5px #4a90e2;
+}
+
+.iconSet{
+    height: 25px; 
+    width: 25px;
+}
+
+.documentHead{
+    font-family: Roboto;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0px;
+}
+.iconSetRounded{
+    height: 25px; 
+    width: 25px;
+    border-radius: 50%;
+}
+
+.navSet{
+    margin: 0px;
+    font-size: 16px;
+    color: white;
+    font-family: Roboto;
+    font-weight: 500;
+    cursor: pointer;  
+}
+
+.grayHead{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+     background-color: #ecf0f1;
+  }
+  
+  .point{
+    cursor: pointer;
+  }
+

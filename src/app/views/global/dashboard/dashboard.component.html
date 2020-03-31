@@ -1,0 +1,89 @@
+<app-font-set [ngClass]="[bg_color]" ></app-font-set>
+<app-login-header ></app-login-header>
+
+
+<div [ngClass]="[bg_image, 'container-fluid px-5']" >
+   <div class="mt-5">
+
+      <div class="row">
+         <div class="col-md-8 d-flex align-items-center">
+            <div>
+            <p class="txt1"> {{lan.document_attestation_system}} </p>   
+            <img style="height: 60px; width: auto; cursor: pointer;" (click)="doc_verification()" 
+            src="assets/img/inFron.svg" />
+         </div>
+         </div>
+
+         <div  class="col-md-4 rounded">
+            
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+               <div [ngClass]="[setBg, diff]" class="container rounded p-4 setBorder shadow setPos">
+                  <p [ngClass]="['welcome', ft_xl]" > {{lan.welcome_to_H_TE_department}} </p>
+
+                  <div class="form-group">
+                     <input type="text" name="email_id" #email_id="ngModel" [(ngModel)]="model.email_id"
+                        class="form-control bor" [ngClass]="{ 'is-invalid': f.submitted && email_id.invalid }"
+                        [pattern]="emailRegex" required placeholder="Email id">
+                  </div>
+                  <br>
+                  <div class="input-group mb-3">
+                     <input type="password" name="password" #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" [(ngModel)]="model.password"
+                        class="form-control bor" required id="pass" placeholder="Password">
+                     <div class="input-group-append">
+                        <span (click)="hide()" *ngIf="!eye" class="input-group-text point setback">
+                           <i class="fa fa-eye"></i></span>
+                        <span (click)="show()" *ngIf="eye" class="input-group-text point setback">
+                           <i class="fa fa-eye-slash"></i></span>
+                     </div>
+                  </div>
+                  <div class="input-group mb-3">
+                     <input type="text" value={{setCapcha}} disabled style="font-family: cursive;"
+                     readonly="readonly" class="form-control bor">
+                     <div class="input-group-append">
+                        <span (click)="capcha_create()"  class="input-group-text point setback">
+                           <i class="fa fa-retweet"></i></span>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <input type="text" name="capcha" #capcha="ngModel" [(ngModel)]="model.capcha" maxlength="7"
+                        class="form-control bor" [ngClass]="{ 'is-invalid': f.submitted && capcha.invalid }"
+                        (keyup)="capcha_chk()" autocomplete="off"
+                      required placeholder="Enter Captcha">
+                      <p class="m-0" style="font-size: 12px; font-family: Roboto; color: red;"> {{capcha_error}} </p>
+                  </div>
+                
+                  <br>
+
+                  <div class="d-flex justify-content-between">
+                     <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label [ngClass]="['custom-control-label forget', ft_md]" for="customCheck"> {{lan.remember_me}} </label>
+                     </div>
+                     <p [ngClass]="['forget', ft_md]" (click)="forgotpass()"> {{lan.forgot_password}} </p>
+                  </div>
+
+
+                  <button type="submit" [ngClass]="['btn btnset',ft_xl, continue]" > {{lan.sing_in}} </button>
+                  <br><br>
+                  <div class="d-flex justify-content-center">
+                     <p class="newUser mr-2"> {{lan.new_user}} </p>
+                     <p class="newUser register" (click)="registerhere()"> {{lan.register}} </p>
+                  </div>
+
+               </div>
+
+
+            </form>
+         </div>
+      </div>
+
+
+   </div>
+</div>
+
+<br/><br/>
+
+
+<app-login-footer></app-login-footer>
+     

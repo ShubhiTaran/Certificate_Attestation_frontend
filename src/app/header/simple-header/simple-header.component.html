@@ -1,0 +1,116 @@
+<!-- 
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+ 
+       <div class="d-flex align-items-center">
+          <img class="logo mr-4" src="assets/img/gomLogo1.png" alt="Maharashtra Shashan" />
+          <div>
+             <p class="higher">Higher & Technical Education Department </p>
+             <p class="higher higher_bold"> Government of Maharashtra</p>
+          </div>
+       </div>
+ 
+       <div>
+ 
+          <div class="d-flex align-items-center">
+             <div>
+                <div class="d-flex">
+                   <p class="navHome">Home</p>
+                   <span class="navHome ">|</span>
+                   <p class="navHome">Sitemap</p>
+                   <span class="navHome">|</span>
+                   <p class="navHome">Contact us</p>
+                </div>
+                <div>
+                   <input type="text" class="form-control mt-1"  placeholder="&#xF002; Search" />
+                </div>
+             </div>
+             <img class="logo ml-4" src="assets/img/mahait-logo.png" alt="mahait-logo" />
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ 
+ <div class="container-fluid backgroundImg">
+    <div class="container mt-5">
+    
+       <div class="row">
+          <div class="col-md-8 d-flex align-items-center">
+             <p class="txt1">Document Attestation System</p>
+          </div>
+ 
+          <div class="col-md-4 rounded">
+             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="bg-white container rounded p-4 setBorder shadow setPos">
+                   <p class="welcome">Welcome to H&TE Department</p>
+ 
+                   <div class="form-group">
+                      <input type="text" name="email_id" #email_id="ngModel" [(ngModel)]="model.email_id"
+                         class="form-control bor" [ngClass]="{ 'is-invalid': f.submitted && email_id.invalid }"
+                         [pattern]="emailRegex" required placeholder="Email id">
+                   </div>
+                   <br>
+                   <div class="input-group mb-3">
+                      <input type="password" name="password" #password="ngModel"
+                         [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" [(ngModel)]="model.password"
+                         class="form-control bor" required id="pass" class="form-control bor" placeholder="Password">
+                      <div class="input-group-append">
+                         <span (click)="hide()" *ngIf="!eye" class="input-group-text point setback">
+                            <i class="fa fa-eye"></i></span>
+                         <span (click)="show()" *ngIf="eye" class="input-group-text point setback">
+                            <i class="fa fa-eye-slash"></i></span>
+                      </div>
+                   </div>
+                   <br>
+ 
+                   <div class="d-flex justify-content-between">
+                      <div class="custom-control custom-checkbox">
+                         <input type="checkbox" class="custom-control-input" id="customCheck">
+                         <label class="custom-control-label forget" for="customCheck">Remember Me</label>
+                      </div>
+                      <p class="forget" (click)="forgotpass()">Forgot Password?</p>
+                   </div>
+ 
+ 
+                   <button type="submit" class="btn btnset">SIGN IN</button>
+                   <br><br>
+                   <div class="d-flex justify-content-center">
+                      <p class="newUser mr-2">New User? </p>
+                      <p class="newUser register" (click)="registerhere()">Register</p>
+                   </div>
+ 
+                </div>
+ 
+ 
+             </form>
+          </div>
+       </div>
+ 
+ 
+    </div>
+ </div>
+ 
+ <br>
+ <br>
+ <br>
+ <div class="container">
+    <div class="container">
+       <p class="about">About <strong> MahaIT </strong></p>
+       <p class="contant">MAHAIT is an private company entity and strives to bring in transformation in ensuring timely
+          delivery of citizen services by way of undertaking IT transformation for the State.</p>
+       <p class="contant"> MAHAIT believes that the development in the field of Information and Communication Technology
+          (ICT) can be
+          effectively leveraged to deliver a variety of information and services to the citizens effectively and
+          efficiently.</p>
+       <p class="contant">
+          The MAHAIT has developed one Common State Wide Online Examination Enrollment Portal and facilitate large number
+          of applicants applying for various examinations covering Recruitment examinations.</p>
+    </div>
+ </div>
+ <br>
+ 
+ 
+ 
+ <app-app-footer></app-app-footer> -->

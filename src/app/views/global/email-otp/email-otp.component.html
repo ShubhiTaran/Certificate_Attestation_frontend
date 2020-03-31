@@ -1,0 +1,77 @@
+<div [ngClass]="[bg_color]">
+<app-font-set></app-font-set>
+</div>
+<app-login-header ></app-login-header>
+
+   
+<div [ngClass]="[bg_image, 'container-fluid px-5']" >
+   <div class="pt-5">
+         <!-- <div class="row">
+            <div class="col-md-2">
+               <img class="logo" src="assets/img/mlogo1.png" alt="Maharashtra Shashan" />
+            </div>
+         </div> -->
+   
+   
+   
+         <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+               <p class="txt1"> {{lan.document_attestation_system}} </p>
+            </div>
+   
+            <div class="col-md-4 rounded">
+               <!-- <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)"> -->
+                     <form [formGroup]="forgotForm">
+                  <div  [ngClass]="[setBg, diff]" class="container rounded p-4 setBorder shadow setPos">
+                     <div class="d-flex justify-content-between">
+                        <p [ngClass]="['welcome', ft_xl]" > {{lan.otp_verification}} </p>
+                           <!-- <p class="ft-lg">{{ time }}</p> -->
+                     </div>
+                   
+   
+                     <div id="u" class="form-group">
+                           <input type="text" formControlName="email_otp" class="form-control bor" 
+                           placeholder="Enter OTP" alt="login" >
+                           <p *ngIf="" class="erroru">
+                              OTP is required
+                           </p>
+                        </div>
+                     <br>
+   
+                     <br>
+   
+                     <br><br>  <br><br>
+                     <div class="d-flex">
+                           <button type="submit" [ngClass]="['btn btnset',ft_md, continue]" (click)="db()"> {{ lan.cancel}} </button> &nbsp;
+                           <button type="submit" [ngClass]="['btn btnset',ft_md, continue]" (click)="otppass()"> {{ lan.submit }} </button>
+                        </div>
+   
+                  </div>
+   
+   
+               </form>
+            </div>
+         </div>
+   
+   
+      </div>
+   </div>
+   
+   <!-- <br>
+   <br>
+   <br>
+   <div class="container">
+      <div class="container">
+         <p class="about">{{lan.about}}  <strong> {{lan.mahait}} </strong></p>
+         <div [ngClass]="[ft_xl]">
+               <p class="contant"> {{lan.para1}} </p>
+               <p class="contant"> {{lan.para2}} </p>
+               <p class="contant"> {{lan.para3}} </p>
+         </div>
+      </div>
+   </div>
+   <br> -->
+      
+
+<app-login-footer></app-login-footer>
+     

@@ -1,0 +1,147 @@
+.backgroundImg-blue {
+	background-image: url("assets/img/lawyer-today-1.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.backgroundImg-black {
+	background-image: url("assets/img/login_bg_black.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo{
+	width: auto;
+  height:100%;
+}
+
+.higher{
+	font-family: Roboto;
+  // font-size: 18px;
+  font-weight: 300;
+	color: #004b8f;
+	margin: 0px;
+}
+
+.higher_bold{
+	font-weight: bold;
+}
+
+.txt1{
+	color: #ffffff;
+	font-size: 60px;
+  font-weight: bold;
+  font-family: Roboto;
+//   background-color: #ffffff;
+}
+
+.txt2{
+	font-weight: bold;
+}
+
+.welcome{
+	font-family: Roboto;
+	// color: #000000;
+	// font-size: 20px;
+}
+
+.bor{
+	// border-top: 1px solid white;
+	// border-left: 1px solid white;
+	// border-right: 1px solid white;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 1px solid gray;
+	border-radius: 0px;
+	// display: inline-block;
+	// width: 100%;
+	// font-size: 0.875rem;
+    // font-weight: 400;
+}
+
+.forget{
+	font-family: Roboto;
+	font-size: 14px;
+	color: var(--greyish-brown);
+	text-align: right;
+	cursor: pointer;
+}
+
+.navHome{
+	// text-align: center;
+	margin-right: 10px;
+	cursor: pointer;
+font-family: Roboto;
+// font-size: 13px;
+color: var(--black);
+margin-bottom: 0px;
+}
+
+.btnset{
+	// background-color: #4990e2;
+	width: 100%;
+	// font-size: 18px;
+	font-family: Roboto;
+	// color: #ffffff;
+	text-align: center;
+}
+
+.newUser{
+	font-family: Roboto;
+	font-size: 15px;
+	color: var(--black);
+	margin:0px;
+	cursor: pointer;
+}
+
+.register{
+	font-weight: 600;
+  color: #4a90e2;
+  cursor: pointer;
+}
+
+.setBorder{
+	border-bottom: 3px solid #4a90e2;
+}
+
+.setPos{
+	position: relative;
+	top:50px;
+}
+
+.contant{
+	font-family: Roboto;
+	// font-size: 16px;
+	text-align: center;
+	color: var(--black-two);
+	margin: 0px;
+}
+
+.about{
+	font-family: Roboto;
+	font-size: 35px;
+	// font-weight: 600;
+	color: var(--black);
+	text-align: center;
+}
+
+.point{
+	cursor: pointer;
+}
+
+.setback{
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 1px solid gray;
+	border-radius: 0px;
+}
+
+.is-invalid{
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 1px solid red;
+	border-radius: 0px;
+}

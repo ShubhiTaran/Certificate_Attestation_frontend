@@ -1,0 +1,34 @@
+.import{
+  color: #d0021b;
+}
+
+.nameTag{
+  font-family: Roboto;
+  // font-size: 16px;
+  color: #494949;
+  text-align: center;
+}
+
+.btnSize{
+  padding: 12px 60px;
+  background-color: #4990e2;
+  color: white;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.head{
+  font-family: Roboto;
+  // font-size: 25px;
+  color: var(--black);
+  margin: 0px;
+  text-align: center;
+}
+
+.error{
+  width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #f86c6b;
+}

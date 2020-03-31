@@ -1,0 +1,160 @@
+<app-font-set ></app-font-set>
+
+<app-user-head pgName="Application form"></app-user-head>
+<app-big-header [number]=4 [application_id]='application_id' [_id]='_id' [userName]="userName"></app-big-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div [ngClass]="['container', diff]">
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+      <form [formGroup]="gurantorForm">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <p [ngClass]="['totTxt', ft_md]" > {{ lan.valid_period_content }} </p>
+            <br>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.full_name}} <span
+                  style="color: red">*</span></label>
+              <input type="text" autocomplete="off" formControlName="guarantor_name" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                [class.is-invalid]='submitted && f.guarantor_name.errors' >
+              <div *ngIf="submitted && f.guarantor_name.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_name.errors.required"> {{ lan.please_enter}} {{ lan.full_name}} </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.country }} <span
+                  style="color: red">*</span></label>
+              <select formControlName="guarantor_country" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                (change)="onChangeCountry()" [class.is-invalid]='submitted && f.guarantor_country.errors'>
+                <!-- <option value="">Select country...</option> -->
+                <option *ngFor="let countries of api1" [value]="countries.name">{{countries.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.guarantor_country.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_country.errors.required"> {{ lan.please_select }} {{ lan.country }} </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.pincode }} <span
+                  style="color: red">*</span></label>
+              <input type="text" autocomplete="off" formControlName="guarantor_pincode"
+                [ngClass]="['form-control frm-inside-txt', ft_md]" (keyup)="pincode_no()" minlength="3" maxlength="10"
+                [class.is-invalid]='submitted && f.guarantor_pincode.errors' >
+              <div *ngIf="submitted && f.guarantor_pincode.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_pincode.errors.required"> {{ lan.please_select}} {{ lan.pincode }} </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.house_number}} <span
+                  style="color: red">*</span></label>
+              <input type="text" autocomplete="off" formControlName="guarantor_house_no"
+                [ngClass]="['form-control frm-inside-txt', ft_md]"
+                [class.is-invalid]='submitted && f.guarantor_house_no.errors' >
+              <div *ngIf="submitted && f.guarantor_house_no.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_house_no.errors.required"> {{ lan.please_enter}} {{ lan.house_number }} </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.state }} <span
+                  style="color: red">*</span></label>
+              <select formControlName="guarantor_state" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                (change)="onChangeState($event.target.value)"
+                [class.is-invalid]='submitted && f.guarantor_state.errors'>
+               
+                <option *ngFor="let state of states" [value]="state.name">{{state.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.guarantor_state.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_state.errors.required"> {{ lan.please_select}} {{ lan.state }} </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.mobile_number }} <span
+                  style="color: red">*</span></label>
+              <div class="input-group">
+                <div class="input-group-append">
+
+                  <select formControlName="guarantor_phonecode" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                    [class.is-invalid]='submitted && f.guarantor_phonecode.errors'>
+                    <option value="">..</option>
+                    <option *ngFor="let countries of api1" [value]="countries.phonecode">{{countries.phonecode}}
+                    </option>
+                  </select>
+
+                </div>
+                <input type="text" autocomplete="off" (keyup)="guarantor_number()" minlength="10" maxlength="10"
+                  formControlName="guarantor_contact" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                  [class.is-invalid]='submitted && f.guarantor_contact.errors' >
+                <div *ngIf="submitted && f.guarantor_contact.errors" class="invalid-feedback">
+                  <div *ngIf="f.guarantor_contact.errors.required"> {{ lan.please_enter}} {{ lan.mobile_number }}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.street_number }} <span
+                  style="color: red">*</span></label>
+              <input type="text" autocomplete="off" formControlName="guarantor_street_no"
+                [ngClass]="['form-control frm-inside-txt', ft_md]"
+                [class.is-invalid]='submitted && f.guarantor_street_no.errors' >
+              <div *ngIf="submitted && f.guarantor_street_no.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_street_no.errors.required"> {{ lan.please_enter}} {{ lan.street_number }} </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [ngClass]="['frm-txt', ft_sm]" placement="top" ngbTooltip="{{ lan.tooltip}}"> {{ lan.city}} <span
+                  style="color: red">*</span></label>
+              <select formControlName="guarantor_city" [ngClass]="['form-control frm-inside-txt', ft_md]"
+                [class.is-invalid]='submitted && f.guarantor_city.errors'>
+                <!-- <option value="">Select city...</option> -->
+                <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.guarantor_city.errors" class="invalid-feedback">
+                <div *ngIf="f.guarantor_city.errors.required"> {{ lan.please_enter}} {{ lan.city}} </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <input type="hidden" formControlName="application_no">
+      </form>
+
+
+    </div>
+  </div>
+
+
+  <br>
+
+
+  <div class="text-center">
+    <!-- <label class="btn text-primary" style="font-size: 14px; font-family: Roboto;" (click)="reset()">Reset</label> <br> -->
+    <button type="button" [ngClass]="['btn mr-3', continue_, ft_md]" (click)="back()"> {{ lan.back}} </button>
+    <button type="button" [ngClass]="['btn mr-3', continue_, ft_md]" (click)="cancel()"> {{ lan.cancel}} </button>
+    <button type="button" [ngClass]="['btn', continue_, ft_md]" (click)="onverify()"> {{ lan.save_continue }} </button>
+  </div>
+
+  <br>
+</div>
+<app-user-footer></app-user-footer>

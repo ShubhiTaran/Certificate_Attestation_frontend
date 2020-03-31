@@ -1,0 +1,44 @@
+
+.btnSet{
+    background-color: #135b98;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.top_head{
+    font-family: Roboto;
+    // font-size: 20px;
+    color: #3068a8;
+    font-weight: 600;
+}
+// sm
+.child{
+    font-family: Roboto;
+    // font-size: 16px;
+    // color: #494949;
+}
+
+// md
+.parent{
+    font-family: Roboto;
+    // font-size: 18px;
+    font-weight: 600;
+    // color: #494949;
+}
+
+.gotoTop{
+    height: 50px; 
+    width: auto; 
+    cursor: pointer;
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+}
+
+.gotoTop:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+

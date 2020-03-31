@@ -1,0 +1,30 @@
+
+<div class="container-fluid px-5">
+
+    <div class="d-flex justify-content-between py-1">
+        <div [ngClass]="['d-flex align-items-center', diff]" >
+            <label class="my-0 ft-sm mr-2 point" (click)="subtract()" > {{ a }} -</label>
+            <label class="my-0 ft-sm mr-2 point" (click)="nutral()"> {{ a }} </label>
+            <label class="my-0 ft-sm mr-2 point"  (click)="add()"> {{ a }} +</label>
+            <label class="my-0 ft-md mr-2 setBlack" (click)="background('black')" > {{ a}} </label>
+            <label class="my-0 ft-md mr-2 setBlue" (click)="background('white')" > {{ a }} </label>
+
+            <!-- <select class="drop" [(ngModel)]="identifiLan" (change)="languages($event.target.value)" >
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+            </select> -->
+        </div>
+
+        <div>
+            <div class="input-group">
+                <input type="text" #search_val  class="input-sm" style="height:25px; width:150px; font-size: 14px;"
+                 placeholder="Search">
+                <div (click)="search(search_val.value)" class="input-group-prepend">
+                    <span class="input-group-text point" style="height:25px;"> 
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

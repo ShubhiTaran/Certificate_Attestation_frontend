@@ -1,0 +1,72 @@
+.navbar{
+  // font-size: 16px;
+  font-weight: 600;
+  color: #282828;
+  font-family:Roboto;
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.topHead{
+  font-family: Roboto;
+  // font-size: 18px;
+  // color: #4a90e2;
+  cursor: pointer;
+}
+
+.back_Set{
+  // padding: 10px;
+  border-radius: 33.8px;
+  // background-color: #3068a8;
+  width: 30px;
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+  font-family: Roboto;
+  // font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  // border-bottom: solid 2px  #3068a8;
+  // display: inline;
+}
+
+.deselect{
+  opacity: 0.29;
+}
+
+.txtDeselect{
+ color: #282828;
+}
+
+.viewDetail{
+  color: #4a90e2;
+  cursor: pointer;
+}
+
+.tblRow{
+  font-family: Roboto;
+  // font-size: 13px;
+  color: var(--black);
+}
+
+.noData{
+    font-size: 18px;
+    font-family: Roboto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.tblHead{
+	font-family: Roboto;
+	// font-size: 14px;
+	font-weight: 500;
+  color: #ffffff;
+  // background-color: #004b8f;
+}
+
+
+.table-striped td {border: none !important; border-right: solid 1px #ccc !important;}
+
+.table-striped th {border: none !important; border-right: solid 1px #ccc !important;}

@@ -1,0 +1,61 @@
+<app-font-set></app-font-set>
+<app-user-head pgName="Receipt"></app-user-head>
+
+<br>
+
+<div [ngClass]="['container-fluid p-0', diff]">
+  <p [ngClass]="['m-0 bold text-center', ft_xl]"> {{ lan.receipt }} </p>
+
+  <hr style="border: .3px solid gray; opacity:.3;">
+
+   <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+      <img style="height: 226px; width:180px;" src="{{ user_image }}" />
+    </div>
+    <div class="col-md-5">
+      <table [ngClass]="[ft_md]">
+
+        <tr>
+          <td class="text-right pr-3"> {{ lan.full_name}} : </td>
+          <td class="text-left">{{ reciept_data.name }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-3"> {{ lan.fathers_name }} : </td>
+          <td class="text-left">{{ reciept_data.father_name }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-3"> {{ lan.mothers_name }} :</td>
+          <td class="text-left">{{ reciept_data.mother_name }}</td>
+        </tr>
+        <tr>
+          <td class="text-right pr-3"> {{ lan.application_no }} :</td>
+          <td class="text-left">{{ reciept_data.application_number }}</td>
+
+        </tr>
+        <tr>
+          <td class="text-right pr-3"> {{ lan.appointment_date }} :</td>
+          <td class="text-left">{{ reciept_data.appointment_date }}</td>
+
+        </tr>
+       
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <p [ngClass]="['m-0 text-center', ft_md]"> {{ reciept_data.meeting_address }} </p>
+  <hr>
+
+  <div class="d-flex  justify-content-center align-items-center">
+    <img style="height: 15px; width: auto;" src="assets/img/download.svg" />
+    <label [ngClass]="['text-danger ml-2 my-0 point',ft_md]" (click)="DownloadPDF()"> {{ lan.download_receipt}} </label>
+  </div>
+  <br> 
+  <p [ngClass]="['m-0 text-center', ft_sm]"> {{ lan.print_copy}} </p>
+
+</div>
+
+
+<app-user-footer></app-user-footer>

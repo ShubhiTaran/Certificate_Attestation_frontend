@@ -1,0 +1,27 @@
+
+<div class="contaier-fluid" style="background-color: #4a90e2">
+  <div class="mx-5 d-flex justify-content-between align-items-center">
+    <img class="my-2" style="height: 40px; width: 45px" src="assets/img/mlogo2.png" />
+    
+    <div ngbDropdown placement="bottom-right" class="d-inline-block">
+      <!-- <button class="btn btn-outline-primary" >Toggle dropdown</button> -->
+      <label class="name" id="dropdownBasic1" ngbDropdownToggle> {{ userName }} </label>
+      <div class="setBorder" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <div routerLink="/dashboard" ngbDropdownItem>
+          <img class="mr-2 iconSet"  src="assets/img/user.png" />
+          <label class="m-0 p-0">PROFILE</label>
+        </div>
+      
+        <div routerLink="/dashboard" ngbDropdownItem>
+          <img class="mr-2 iconSet " src="assets/img/groupp.png" />
+          <label class="m-0 p-0" >MANDATORY DOCUMEMNTS</label>
+        </div>
+        <div routerLink="/dashboard" ngbDropdownItem>
+          <img class="mr-2 iconSet" src="assets/img/logout.png" />
+          <label class="m-0 p-0">LOGOUT</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<app-font-set ></app-font-set>
+
+<app-user-head  pgName="{{ lan.profile }}"></app-user-head>
+
+<br>
+
+<h3 [ngClass]="['profile', ft_xl, diff]" > {{ lan.profile }} </h3>
+<hr style="border:.3px solid gray; opacity:.2;">
+<div [ngClass]="['container', diff]">
+
+
+  <form [ngClass]="[ft_md]" *ngIf="userDetails">
+    <div class="row">
+      <div class="col-md-3"> </div>
+      <div class="col-md-6">
+
+
+        <div class="row">
+          <div class="col-sm-4"> <label > {{ lan.first_name }} : </label> </div>
+          <div class="col-sm-8">
+            <input type="email" disabled value={{userDetails.first_name}} [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label> {{ lan.middle_name }} : </label></div>
+          <div class="col-sm-8"><input type="text" disabled value={{userDetails.middle_name}}
+            [ngClass]="['form-control txtLable', ft_md]" ></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label >{{ lan.last_name }} :</label></div>
+          <div class="col-sm-8"> <input type="text" disabled value={{userDetails.last_name}}
+              [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label > {{ lan.date_of_birth }} :</label></div>
+          <div class="col-sm-8"><input type="text" disabled value="{{userDetails.dob | date:'dd-MM-yyyy' }}"
+             [ngClass]="['form-control txtLable', ft_md]">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label >{{ lan.nationality }} :</label></div>
+          <div class="col-sm-8"> <input type="text" disabled value={{userDetails.nationality}}
+              [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label > {{ lan.sex}} :</label></div>
+          <div class="col-sm-8"> <input type="text" disabled value={{userDetails.gender}}
+              [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label > {{ lan.email_id }} :</label></div>
+          <div class="col-sm-8"> <input type="text" disabled value={{userDetails.email_id}}
+              [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-4"> <label > {{ lan.mobile_number }} :</label></div>
+          <div class="col-sm-8"> <input type="text" disabled value={{userDetails.contact}}
+              [ngClass]="['form-control txtLable', ft_md]"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<hr>
+<app-user-footer></app-user-footer>

@@ -1,0 +1,161 @@
+<app-font-set ></app-font-set>
+<app-admin-header pgName="{{lan.add_new_account }}"></app-admin-header>
+<ngx-ui-loader></ngx-ui-loader>
+
+<div [ngClass]="['container-fluid', diff]">
+   <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <br>
+
+      <div class="container">
+
+         <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+               <p [ngClass]="[ft_md]" > {{ lan.welcome_to_government_of_maharashtra_please_create_your_account }}  </p>
+            </div>
+         </div>
+
+
+         <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 mr-2">
+
+               <div class="form-group">
+                  <label for="Utyoe" [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.user_type}} <span class="import">*</span> </label>
+                  <select  [ngClass]="['form-control frm-inside-txt', ft_md]" #user_type="ngModel" name="user_type"
+                     [(ngModel)]="model.user_type"[class.is-invalid]='f.submitted && user_type.invalid'
+                     required>
+                     <option value="deskofficer"> {{ lan.desk_officer }} </option>
+                     <option value="deputysecretary"> {{ lan.deputy_secretary }} </option>
+                  </select>
+                  <div *ngIf="f.submitted && user_type.invalid" class="invalid-feedback">
+                     <div *ngIf="user_type.errors.required"> {{ lan.please_select}} {{ lan.user_type}} </div>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.first_name }} <span class="import">*</span> </label>
+                  <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="first_name" [(ngModel)]="model.first_name"
+                     #first_name="ngModel" autocomplete="off"
+                    [class.is-invalid]='f.submitted && first_name.invalid' required />
+
+                  <div *ngIf="f.submitted && first_name.invalid" class="invalid-feedback">
+                     <div *ngIf="first_name.errors.required"> {{ lan.please_enter}} {{ lan.first_name}} </div>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.middle_name }} </label>
+                  <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="middle_name" [(ngModel)]="model.middle_name"
+                     #middle_name="ngModel" autocomplete="off"
+                    [class.is-invalid]='f.submitted && middle_name.invalid'  />
+
+                  <div *ngIf="f.submitted && middle_name.invalid" class="invalid-feedback">
+                     <div *ngIf="middle_name.errors.required"> {{ lan.please_enter}} {{ lan.middle_name}} </div>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.last_name }} <span class="import">*</span> </label>
+                  <input type="text" [ngClass]="['form-control frm-inside-txt', ft_md]" name="last_name" [(ngModel)]="model.last_name"
+                     #last_name="ngModel" autocomplete="off"
+                    [class.is-invalid]='f.submitted && last_name.invalid' required />
+
+                  <div *ngIf="f.submitted && last_name.invalid" class="invalid-feedback">
+                     <div *ngIf="last_name.errors.required"> {{ lan.please_enter}} {{ lan.last_name}} </div>
+                  </div>
+               </div>
+
+
+            </div>
+
+            <div class="col-md-4">
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.nationality }} <span class="import">*</span> </label>
+                  <select  [ngClass]="['form-control frm-inside-txt', ft_md]" #nationality="ngModel" name="nationality"
+                     [(ngModel)]="model.nationality"[class.is-invalid]='f.submitted && nationality.invalid'
+                     required>
+                     <option value=""></option>
+                  <option *ngFor="let countries of country">{{countries.name}}</option>
+                     <!-- <option value="deputysecretary">Deputy Secretary</option> -->
+                  </select>
+
+                  <div *ngIf="f.submitted && nationality.invalid" class="invalid-feedback">
+                     <div *ngIf="nationality.errors.required"> {{ lan.please_select }} {{ lan.nationality }} </div>
+                  </div>
+               </div>
+
+
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.mobile_number }} <span class="req" style="color: #f54b5e;"> * </span></label>
+                  <input type="text" (keyup)="contactNo_no()" [ngClass]="['form-control frm-inside-txt', ft_md]" name="phone_number"
+                     [(ngModel)]="model.phone_number" #phone_number="ngModel" autocomplete="off"
+                    [class.is-invalid]='f.submitted && phone_number.invalid' required maxlength="10"
+                     minlength="10" />
+                  <div *ngIf="f.phone_number && phone_number.invalid" class="invalid-feedback">
+                     <div *ngIf="phone_number.errors.required"> {{ lan.please_enter }} {{ lan.mobile_number }} </div>
+                  </div>
+                  <div [hidden]="!model.phone_number" class="invalid-feedback">
+                     <div *ngIf="!phone_number.valid"> {{ lan.mobile_number }} {{ lan.not_valid}} </div>
+                  </div>
+
+               </div>
+               <div class="form-group">
+                  <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.email_id }} <span class="import"> *</span> </label>
+                  <input type="text" autocomplete="off" [ngClass]="['form-control frm-inside-txt', ft_md]" required [(ngModel)]="model.email_id"
+                     name="email_id"[class.is-invalid]='f.submitted && email_id.invalid' #email_id="ngModel"
+                     [email]="true">
+
+                  <div *ngIf="f.submitted && email_id.invalid" class="invalid-feedback">
+                     <div *ngIf="email_id.errors.required"> {{ lan.please_enter }} {{ lan.email_id }} </div>
+                  </div>
+
+                  <div *ngIf="model.email_id" class="invalid-feedback">
+                     <div *ngIf="!email_id.valid"> {{ lan.email_id  }} {{ lan.not_valid }} </div>
+                  </div>
+               </div>
+
+               <!-- <div class="d-flex">
+                  <div class="form-group mr-1">
+                     <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.password }}  <span class="import">*</span> </label>
+                     <input type="password" [ngClass]="['form-control frm-inside-txt', ft_md]" name="password" [(ngModel)]="model.password"
+                        #password="ngModel" autocomplete="off"
+                       [class.is-invalid]='f.submitted && password.invalid' required />
+
+                     <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required"> {{ lan.please_enter }} {{ lan.password }} </div>
+                     </div>
+                  </div>
+
+                  <div class="form-group ml-1">
+                     <label [ngClass]="[ft_sm]" placement="top" ngbTooltip="{{lan.tooltip}}" > {{ lan.confirm_password }} <span class="import">*</span> </label>
+                     <input type="password" [ngClass]="['form-control frm-inside-txt', ft_md]" name="Cpassword" [(ngModel)]="model.Cpassword"
+                        #Cpassword="ngModel" autocomplete="off"
+                       [class.is-invalid]='f.submitted && Cpassword.invalid' required />
+
+                     <div *ngIf="f.submitted && Cpassword.invalid" class="invalid-feedback">
+                        <div *ngIf="Cpassword.errors.required"> {{ lan.please_enter }} {{ lan.confirm_password }} </div>
+                     </div>
+
+                     <div class="error">
+                        <div>{{ passMathch }}</div>
+                     </div>
+                  </div>
+               </div> -->
+            </div>
+         </div>
+
+      </div>
+      <br>
+
+      <div class="text-center">
+         <br>
+         <button type="submit" (click)="home()" [ngClass]="['mr-3 btn', continue, ft_md]"> {{lan.cancel}} </button>
+         <button type="submit"[ngClass]="['btn', continue, ft_md]"> {{ lan.create_account }} </button>
+         <br>
+         <br><br>
+      </div>
+   </form>
+</div>
+
+<app-admin-footer></app-admin-footer>

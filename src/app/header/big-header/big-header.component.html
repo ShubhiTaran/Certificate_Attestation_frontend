@@ -1,0 +1,33 @@
+
+
+<div class="container-fluid setBor body-white">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+        <div (click)="one()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[1], bg_color]" [ngClass]="" >1</label>
+            <p  [ngClass]="[setColor[1], setTxt]" > {{ lan.personal_details }} </p>
+        </div>
+        <div (click)="two()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[2], bg_color]">2</label>
+            <p   [ngClass]="[setColor[2], setTxt]"> {{ lan.passport_details }} </p>
+        </div>
+        <div (click)="three()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[3], bg_color]">3</label>
+            <p   [ngClass]="[setColor[3], setTxt]"> {{ lan.contact_details }} </p>
+        </div>
+        <div *ngIf="behalf" (click)="foure()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[4], bg_color]"> {{ foure_no }} </label>
+            <p   [ngClass]="[setColor[4], setTxt]"> {{ lan.guarantor_details }} </p>
+        </div>
+        <div (click)="five()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[5], bg_color]"> {{ five_no }} </label>
+            <p   [ngClass]="[setColor[5], setTxt]"> {{ lan.current_designation }} </p>
+        </div>
+        <div (click)="six()" class="d-flex flex-wrap align-items-center">
+            <label [ngClass]="[setClass[6], bg_color]"> {{ six_no }} </label>
+            <p  [ngClass]="[setColor[6], setTxt]"> {{ lan.upload_documents }} </p>
+        </div>
+    </div>
+</div>
+
+
+<br>

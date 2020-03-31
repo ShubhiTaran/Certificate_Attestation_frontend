@@ -1,0 +1,99 @@
+<div [ngClass]="[bg_color]">
+   <app-font-set></app-font-set>
+</div>
+<ngx-ui-loader></ngx-ui-loader>
+<app-login-header></app-login-header>
+
+
+<div [ngClass]="['container-fluid px-5', bg_image]">
+   <div class="pt-5">
+
+      <div class="row">
+         <div class="col-md-8 d-flex align-items-center">
+            <p class="txt1"> {{lan.document_attestation_system}} </p>
+         </div>
+
+         <div class="col-md-4 rounded">
+
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                  <div [ngClass]="[setBg, diff]" class="container rounded p-4 setBorder shadow setPos">
+                        <p  [ngClass]="['welcome', ft_xl]"> Reset Password </p>
+
+                  <div class="form-group">
+
+                     <input type="password" [ngClass]="['form-control frm-inside-txt', ft_md]" name="password"
+                     placeholder="Password"
+                        [(ngModel)]="model.password" #password="ngModel" autocomplete="off"
+                        pattern='((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30})' (keyup)="password_chk()"
+                        [class.is-invalid]='f.submitted && (password.invalid)'
+                        required />
+
+                     <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required"> Please enter password
+                           </div>
+                     </div>
+                     <div *ngIf="this.model.password">
+                           <span *ngIf="!passwordStrenth" class="ft-sm" style="color:red">* {{ lan.use_a_mix_of_letters }}
+                           </span>
+                        </div>
+
+                  </div>
+                  <br>
+                  <div class="form-group">
+
+                        <input type="password" [ngClass]="['form-control frm-inside-txt', ft_md]" name="confirm_pass"
+                        [(ngModel)]="model.confirm_pass" #confirm_pass="ngModel" autocomplete="off"
+                        (keyup)="confirm_password()" placeholder="Confirm password"
+                        [class.is-invalid]='f.submitted && (confirm_pass.invalid || !passwordMatch)'
+                        required />
+
+                     <div *ngIf="f.submitted && confirm_pass.invalid" class="invalid-feedback">
+                        <div *ngIf="confirm_pass.errors.required"> Please enter password
+                           </div>
+                     </div>
+
+                     <div *ngIf="f.submitted && !passwordMatch" style="color: #f86c6b; font-size: 80%;">
+                           <div>Password did't matched</div>
+                        </div>
+
+                  </div>
+                  <br>
+
+                  <br><br>
+
+                  <div class="d-flex">
+                     <button type="submit" [ngClass]="['btn btnset',ft_md, continue]" class="btn btnset" (click)="db()">
+                        {{ lan.cancel }} </button> &nbsp;
+                     <button type="submit" [ngClass]="['btn btnset',ft_md, continue]"> {{ lan.submit }} </button>
+                  </div>
+
+
+               </div>
+
+
+            </form>
+
+         </div>
+      </div>
+
+
+   </div>
+</div>
+
+<br>
+<br>
+<br>
+<!-- <div class="container">
+      <div class="container">
+         <p class="about">{{lan.about}}  <strong> {{lan.mahait}} </strong></p>
+         <div [ngClass]="[ft_xl]">
+               <p class="contant"> {{lan.para1}} </p>
+               <p class="contant"> {{lan.para2}} </p>
+               <p class="contant"> {{lan.para3}} </p>
+         </div>
+      </div>
+   </div> -->
+
+
+
+<app-login-footer></app-login-footer>
