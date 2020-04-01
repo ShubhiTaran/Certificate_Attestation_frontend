@@ -8,3 +8,7 @@
     ng serve
 #### Build the angular
     ng build --prod
+
+
+    conf/mahagovprivate.key
+    conf/star_maharashtra_gov_in.crt
