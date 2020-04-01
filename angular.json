@@ -60,8 +60,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+
           "options": {
-            "browserTarget": "ng:build"
+            "browserTarget": "ng:build",
+            "port":4201,
+            "ssl":true,
+            
+        "sslKey": "ssl/mahagovprivate.key",
+        "sslCert": "ssl/star_maharashtra_gov_in.crt"
+          
           },
           "configurations": {
             "production": {
