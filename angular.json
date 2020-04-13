@@ -63,6 +63,7 @@
 
           "options": {
             "browserTarget": "ng:build",
+            
             "ssl":true,
             
         "sslKey": "ssl/mahagovprivate.key",
